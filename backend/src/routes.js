@@ -19,16 +19,25 @@ routes.post('/sessions', SessionController.store);
 // rotas que só irão funcionar com o token de autenticação
 routes.use(authMiddleware);
 
-routes.post('/recipient', RecipientController.store);
+// entregadores
+// listagem
+routes.get('/deliverymans', Deliveryman.index);
+// cadastro
 routes.post('/deliverymans', Deliveryman.store);
+// atualização
+routes.put('/deliverymans/:id', Deliveryman.update);
+// remoção
+routes.delete('/deliverymans/:id', Deliveryman.delete);
+
 // rota de upload de arquivos
 routes.post('/files', upload.single('file'), FileController.store);
 
-// rota para listagem de entregadores
-routes.get('/deliverymans', Deliveryman.index);
-
 routes.put('/users', UserController.update);
+
+// destinatarios
+// cadastro
+routes.post('/recipient', RecipientController.store);
+// atualização
 routes.put('/recipient', RecipientController.update);
-routes.put('/deliverymans', Deliveryman.update);
 
 export default routes;

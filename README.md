@@ -29,3 +29,20 @@ Permitir que destinatários sejam mantidos (cadastrados/atualizados) na aplicaç
 O cadastro de destinatários só pode ser feito por administradores autenticados na aplicação.
 
 O destinatário não pode se autenticar no sistema, ou seja, não possui senha.
+
+### **3. Gestão de entregadores**
+
+Permita que o administrador possa cadastrar entregadores para a plataforma, o entregador deve possuir os seguintes campos:
+
+- id (id do entregador)
+- name (nome do entregador);
+- avatar_id (foto do entregador);
+- email (email do entregador)
+- created_at;
+- updated_at;
+- active;
+
+Crie rotas para listagem/cadastro/atualização/remoção de entregadores;
+
+Obs.: Essa funcionalidade é para administradores autenticados na aplicação. Para manter o registro dos entregadores, a rota de delete apenas inativa o entregador no app, não o remove definitivamente.
+

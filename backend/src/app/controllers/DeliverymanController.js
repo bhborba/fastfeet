@@ -8,6 +8,7 @@ class DeliverymanController {
   // listagem de entregadores
   async index(req, res) {
     const deliverymans = await Deliveryman.findAll({
+      where: { active: true },
       attributes: ['id', 'name', 'email', 'avatar_id'],
       include: [
         {
@@ -74,7 +75,7 @@ class DeliverymanController {
     const { email } = req.body;
 
     // procura na base de dados o usuário que deve ser editado
-    const deliveryman = await Deliveryman.findOne({ where: { email } });
+    const deliveryman = await Deliveryman.findByPk(req.params.id);
 
     /*
      * caso a alteração seja no email, refaz a verificação para garantir
@@ -97,6 +98,19 @@ class DeliverymanController {
       name,
       email,
     });
+  }
+
+  // remoção de entregador
+  async delete(req, res) {
+    // procura na base o entregador com o id passado na url
+    const deliveryman = await Deliveryman.findByPk(req.params.id);
+
+    // define o entregador como inativo no app
+    deliveryman.active = false;
+
+    await deliveryman.save();
+
+    return res.json(deliveryman);
   }
 }
 
