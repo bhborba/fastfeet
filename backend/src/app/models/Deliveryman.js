@@ -16,6 +16,7 @@ class Deliveryman extends Model {
   }
 
   static associate(models) {
+    // associa id do file
     this.belongsTo(models.File, { foreignKey: 'avatar_id', as: 'avatar' });
   }
 }

@@ -70,11 +70,11 @@ class DeliverymanController {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
-    // pega email e senha antiga enviados pela requisição
+    // pega email enviados pela requisição
     const { email } = req.body;
 
     // procura na base de dados o usuário que deve ser editado
-    const deliveryman = await Deliveryman.findByPk(req.deliverymanId);
+    const deliveryman = await Deliveryman.findOne({ where: { email } });
 
     /*
      * caso a alteração seja no email, refaz a verificação para garantir
