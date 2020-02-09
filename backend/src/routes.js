@@ -24,6 +24,9 @@ routes.post('/deliveryman', Deliveryman.store);
 // rota de upload de arquivos
 routes.post('/files', upload.single('file'), FileController.store);
 
+// rota para listagem de entregadores
+routes.get('/deliverymans', Deliveryman.index);
+
 routes.put('/users', UserController.update);
 routes.put('/recipient', RecipientController.update);
 

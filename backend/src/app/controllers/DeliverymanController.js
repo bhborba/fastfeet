@@ -2,8 +2,25 @@
 import * as Yup from 'yup';
 
 import Deliveryman from '../models/Deliveryman';
+import File from '../models/File';
 
 class DeliverymanController {
+  // listagem de entregadores
+  async index(req, res) {
+    const deliverymans = await Deliveryman.findAll({
+      attributes: ['id', 'name', 'email', 'avatar_id'],
+      include: [
+        {
+          model: File,
+          as: 'avatar',
+          attributes: ['name', 'path', 'url'],
+        },
+      ],
+    });
+
+    return res.json(deliverymans);
+  }
+
   // cadastro de entregadores
   async store(req, res) {
     // define como devem ser os dados informados
