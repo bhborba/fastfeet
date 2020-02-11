@@ -7,6 +7,7 @@ import SessionController from './app/controllers/SessionContoller';
 import FileController from './app/controllers/FileController';
 import RecipientController from './app/controllers/RecipientController';
 import Deliveryman from './app/controllers/DeliverymanController';
+import PackageController from './app/controllers/PackageController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -39,5 +40,9 @@ routes.put('/users', UserController.update);
 routes.post('/recipient', RecipientController.store);
 // atualização
 routes.put('/recipient', RecipientController.update);
+
+// encomendas
+// cadastro
+routes.post('/packages', PackageController.store);
 
 export default routes;
