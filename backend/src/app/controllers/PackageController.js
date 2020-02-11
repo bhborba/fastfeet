@@ -1,5 +1,6 @@
 import * as Yup from 'yup';
 import Package from '../models/Package';
+import Notification from '../schemas/Notification';
 
 class PackageController {
   async store(req, res) {
@@ -20,6 +21,13 @@ class PackageController {
       deliveryman_id,
       product,
     });
+
+    // notificar entregador
+    await Notification.create({
+      content: `Nova entrega de ${product} disponivel para retirada`,
+      deliveryman: deliveryman_id,
+    });
+
     return res.json(pack);
   }
 }
