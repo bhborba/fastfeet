@@ -8,6 +8,7 @@ import FileController from './app/controllers/FileController';
 import RecipientController from './app/controllers/RecipientController';
 import Deliveryman from './app/controllers/DeliverymanController';
 import PackageController from './app/controllers/PackageController';
+import NotificationController from './app/controllers/NotificationController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -16,6 +17,10 @@ const upload = multer(multerConfig);
 
 routes.post('/users', UserController.store);
 routes.post('/sessions', SessionController.store);
+
+// notificacoes
+// listagem
+routes.get('/notifications/:id', NotificationController.index);
 
 // rotas que só irão funcionar com o token de autenticação
 routes.use(authMiddleware);
