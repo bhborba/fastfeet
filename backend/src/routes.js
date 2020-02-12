@@ -51,5 +51,7 @@ routes.put('/recipient', RecipientController.update);
 routes.get('/packages', PackageController.index);
 // cadastro
 routes.post('/packages', PackageController.store);
+// atualização
+routes.put('/packages/:id', PackageController.update);
 
 export default routes;
