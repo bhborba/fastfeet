@@ -53,5 +53,7 @@ routes.get('/packages', PackageController.index);
 routes.post('/packages', PackageController.store);
 // atualização
 routes.put('/packages/:id', PackageController.update);
+// cancelamento
+routes.delete('/packages/:id', PackageController.delete);
 
 export default routes;

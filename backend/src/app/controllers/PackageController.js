@@ -130,6 +130,30 @@ class PackageController {
       canceled_at,
     });
   }
+
+  // cancelamento de encomenda
+  async delete(req, res) {
+    // procura na base a encomenda com o id passado na url
+    const pack = await Package.findByPk(req.params.id);
+
+    // avalia se a encomenda já foi cancelada
+    if (pack.canceled_at) {
+      return res.status(400).json({ error: 'Package already canceled' });
+    }
+
+    // define a data de cancelamento
+    pack.canceled_at = new Date();
+
+    await pack.save();
+
+    // notificar novo entregador
+    await Notification.create({
+      content: `Sua entrega de ${pack.product} foi cancelada`,
+      deliveryman: pack.deliveryman_id,
+    });
+
+    return res.json(pack);
+  }
 }
 
 export default new PackageController();
