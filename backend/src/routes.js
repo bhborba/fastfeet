@@ -47,6 +47,8 @@ routes.post('/recipient', RecipientController.store);
 routes.put('/recipient', RecipientController.update);
 
 // encomendas
+// listagem
+routes.get('/packages', PackageController.index);
 // cadastro
 routes.post('/packages', PackageController.store);
 
