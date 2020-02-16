@@ -11,6 +11,7 @@ A aplicação desenvolvida é um app para uma transportadora fictícia, o FastFe
 - ESLint + Prettier + EditorConfig;
 - Sequelize (PostgreSQL);
 - Mongoose (MongoDB)
+- Bee-queue (Redis)
 - Nodemailer
 - Handlebars
 

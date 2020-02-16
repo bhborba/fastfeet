@@ -5,7 +5,8 @@ import Recipient from '../models/Recipient';
 import Notification from '../schemas/Notification';
 import Deliveryman from '../models/Deliveryman';
 
-import Mail from '../../lib/Mail';
+import NewPackageMail from '../jobs/NewPackageMail';
+import Queue from '../../lib/Queue';
 
 class PackageController {
   // listagem de encomendas
@@ -79,20 +80,10 @@ class PackageController {
       attributes: ['name', 'street', 'number', 'state', 'city', 'zip'],
     });
 
-    await Mail.sendMail({
-      to: `${deliveryman.name} <${deliveryman.email}>`,
-      subject: 'Nova encomenda disponível para retirada',
-      template: 'newPackage',
-      context: {
-        deliveryman: deliveryman.name,
-        product,
-        recipient: recipient.name,
-        street: recipient.street,
-        number: recipient.number,
-        zip: recipient.zip,
-        city: recipient.city,
-        state: recipient.state,
-      },
+    await Queue.add(NewPackageMail.key, {
+      deliveryman,
+      recipient,
+      product,
     });
 
     return res.json(pack);
