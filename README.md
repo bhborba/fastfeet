@@ -12,6 +12,7 @@ A aplicação desenvolvida é um app para uma transportadora fictícia, o FastFe
 - Sequelize (PostgreSQL);
 - Mongoose (MongoDB)
 - Nodemailer
+- Handlebars
 
 ### **Funcionalidades**
 

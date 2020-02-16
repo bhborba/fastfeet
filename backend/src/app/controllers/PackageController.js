@@ -75,10 +75,24 @@ class PackageController {
       attributes: ['name', 'email'],
     });
 
+    const recipient = await Recipient.findByPk(recipient_id, {
+      attributes: ['name', 'street', 'number', 'state', 'city', 'zip'],
+    });
+
     await Mail.sendMail({
       to: `${deliveryman.name} <${deliveryman.email}>`,
       subject: 'Nova encomenda disponível para retirada',
-      text: 'Nova encomenda ae',
+      template: 'newPackage',
+      context: {
+        deliveryman: deliveryman.name,
+        product,
+        recipient: recipient.name,
+        street: recipient.street,
+        number: recipient.number,
+        zip: recipient.zip,
+        city: recipient.city,
+        state: recipient.state,
+      },
     });
 
     return res.json(pack);
