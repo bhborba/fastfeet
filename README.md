@@ -78,3 +78,15 @@ Quando a encomenda é **cadastrada** para um entregador, o entregador recebe um 
 Crie rotas para listagem/cadastro/atualização/remoção de encomendas;
 
 Obs.: Essa funcionalidade é para administradores autenticados na aplicação.
+
+### **Funcionalidades do entregador**
+
+Abaixo estão descritas as funcionalidades que você deve adicionar em sua aplicação para os entregadores.
+
+### **1. Visualizar encomendas**
+
+Para que o entregador possa visualizar suas encomendas, ele deverá informar apenas seu ID de cadastro (ID do entregador no banco de dados). Essa funcionalidade deve retornar as encomendas atribuidas a ele, que **não estejam entregues ou canceladas**;
+
+Permita também que ele liste apenas as encomendas que já foram **entregues** por ele, com base em seu ID de cadastro;
+
+Exemplo de requisição: `GET https://fastfeet.com/deliveryman/1/deliveries`

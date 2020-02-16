@@ -9,6 +9,7 @@ import RecipientController from './app/controllers/RecipientController';
 import Deliveryman from './app/controllers/DeliverymanController';
 import PackageController from './app/controllers/PackageController';
 import NotificationController from './app/controllers/NotificationController';
+import DeliverController from './app/controllers/DeliverController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -21,6 +22,12 @@ routes.post('/sessions', SessionController.store);
 // notificacoes
 // listagem
 routes.get('/notifications/:id', NotificationController.index);
+
+// entregas
+// lista encomendas ainda não entregues nem canceladas
+routes.get('/deliveryman/:id/deliveries', DeliverController.index);
+// lista encomendas já entregues
+routes.get('/deliveryman/:id/delivered', DeliverController.delivered);
 
 // rotas que só irão funcionar com o token de autenticação
 routes.use(authMiddleware);
