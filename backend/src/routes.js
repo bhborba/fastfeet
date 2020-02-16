@@ -29,6 +29,11 @@ routes.get('/deliveryman/:id/deliveries', DeliverController.index);
 // lista encomendas já entregues
 routes.get('/deliveryman/:id/delivered', DeliverController.delivered);
 
+// rota para indicar retirada de encomenda
+routes.put('/deliveryman/:id/:packageid', DeliverController.start);
+// rota para indicar entrega de encomenda
+routes.delete('/deliveryman/:id/:packageid', DeliverController.end);
+
 // rotas que só irão funcionar com o token de autenticação
 routes.use(authMiddleware);
 

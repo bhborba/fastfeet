@@ -14,6 +14,7 @@ A aplicação desenvolvida é um app para uma transportadora fictícia, o FastFe
 - Bee-queue (Redis)
 - Nodemailer
 - Handlebars
+- date-fns
 
 ### **Funcionalidades**
 
@@ -90,3 +91,9 @@ Para que o entregador possa visualizar suas encomendas, ele deverá informar ape
 Permita também que ele liste apenas as encomendas que já foram **entregues** por ele, com base em seu ID de cadastro;
 
 Exemplo de requisição: `GET https://fastfeet.com/deliveryman/1/deliveries`
+
+### 2. Alterar status de encomendas
+
+Você deve permitir que o entregador tenha rotas para incluir uma data de retirada (start_date) e data de entrega (end_date) para as encomendas. O entregador só pode fazer **5 retiradas por dia**.
+
+Obs.: Para a funcionalidade de finalizar a entrega, você deverá permitir o envio de uma imagem que irá preencher o campo signature_id da tabela de encomendas.
