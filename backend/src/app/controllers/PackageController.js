@@ -5,6 +5,8 @@ import Recipient from '../models/Recipient';
 import Notification from '../schemas/Notification';
 import Deliveryman from '../models/Deliveryman';
 
+import Mail from '../../lib/Mail';
+
 class PackageController {
   // listagem de encomendas
   async index(req, res) {
@@ -67,6 +69,16 @@ class PackageController {
     await Notification.create({
       content: `Nova entrega de ${product} disponivel para retirada`,
       deliveryman: deliveryman_id,
+    });
+
+    const deliveryman = await Deliveryman.findByPk(deliveryman_id, {
+      attributes: ['name', 'email'],
+    });
+
+    await Mail.sendMail({
+      to: `${deliveryman.name} <${deliveryman.email}>`,
+      subject: 'Nova encomenda disponível para retirada',
+      text: 'Nova encomenda ae',
     });
 
     return res.json(pack);
