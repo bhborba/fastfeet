@@ -1,9 +1,34 @@
 // para validações
 import * as Yup from 'yup';
-
+import { Op } from 'sequelize';
 import Recipient from '../models/Recipient';
 
 class RecipientController {
+  async index(req, res) {
+    const { q } = req.query;
+    let where = {};
+
+    if (q) {
+      where = {
+        name: { [Op.like]: `%${q}%` },
+      };
+    }
+    const recipients = await Recipient.findAll({
+      where,
+      attributes: [
+        'id',
+        'name',
+        'street',
+        'number',
+        'complement',
+        'state',
+        'city',
+        'zip',
+      ],
+    });
+    return res.json(recipients);
+  }
+
   // cadastro de usuário
   async store(req, res) {
     // define como devem ser os dados informados

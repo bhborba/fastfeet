@@ -60,6 +60,8 @@ routes.post('/files', upload.single('file'), FileController.store);
 routes.put('/users', UserController.update);
 
 // destinatarios
+// listagem
+routes.get('/recipient', RecipientController.index);
 // cadastro
 routes.post('/recipient', RecipientController.store);
 // atualização
