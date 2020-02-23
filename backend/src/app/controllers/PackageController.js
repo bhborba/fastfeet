@@ -11,14 +11,14 @@ import Queue from '../../lib/Queue';
 class PackageController {
   // listagem de encomendas
   async index(req, res) {
-    const { product } = req.query;
+    const { q } = req.query;
     let where;
 
-    if (product) {
+    if (q) {
       where = {
         end_date: null,
         canceled_at: null,
-        product: { [Op.like]: `%${product}%` },
+        product: { [Op.like]: `%${q}%` },
       };
     } else {
       where = {

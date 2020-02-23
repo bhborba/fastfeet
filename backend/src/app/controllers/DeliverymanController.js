@@ -1,14 +1,28 @@
 // para validações
 import * as Yup from 'yup';
-
+import { Op } from 'sequelize';
 import Deliveryman from '../models/Deliveryman';
 import File from '../models/File';
 
 class DeliverymanController {
   // listagem de entregadores
   async index(req, res) {
+    const { q } = req.query;
+    let where;
+
+    if (q) {
+      where = {
+        active: true,
+        name: { [Op.like]: `%${q}%` },
+      };
+    } else {
+      where = {
+        active: true,
+      };
+    }
+
     const deliverymans = await Deliveryman.findAll({
-      where: { active: true },
+      where,
       attributes: ['id', 'name', 'email', 'avatar_id'],
       include: [
         {
