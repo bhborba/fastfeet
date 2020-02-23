@@ -10,6 +10,7 @@ import Deliveryman from './app/controllers/DeliverymanController';
 import PackageController from './app/controllers/PackageController';
 import NotificationController from './app/controllers/NotificationController';
 import DeliverController from './app/controllers/DeliverController';
+import DeliveryProblemController from './app/controllers/DeliveryProblemController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -34,7 +35,13 @@ routes.put('/deliveryman/:id/:packageid', DeliverController.start);
 // rota para indicar entrega de encomenda
 routes.delete('/deliveryman/:id/:packageid', DeliverController.end);
 
-// rotas que só irão funcionar com o token de autenticação
+// problemas na entrega - sem autenticacao (entregador)
+// cadastrar um problema
+routes.post('/delivery/:id/problems', DeliveryProblemController.store);
+
+/*
+ ** rotas que só irão funcionar com o token de autenticação **
+ */
 routes.use(authMiddleware);
 
 // entregadores
@@ -67,5 +74,16 @@ routes.post('/packages', PackageController.store);
 routes.put('/packages/:id', PackageController.update);
 // cancelamento
 routes.delete('/packages/:id', PackageController.delete);
+
+// problemas na entrega - autenticado
+// listagem de problemas gerais
+routes.get('/delivery/problems', DeliveryProblemController.index);
+// listagem de problemas especificos de uma encomenda
+routes.get('/delivery/:id/problems', DeliveryProblemController.specific);
+// cancelamento de entrega
+routes.delete(
+  '/delivery/:id/cancel-delivery',
+  DeliveryProblemController.delete
+);
 
 export default routes;

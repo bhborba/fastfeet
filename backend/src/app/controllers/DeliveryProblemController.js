@@ -1,92 +1,94 @@
 import * as Yup from 'yup';
 import Package from '../models/Package';
-import File from '../models/File';
+import DeliveryProblem from '../models/DeliveryProblem';
+
 import Recipient from '../models/Recipient';
 import Notification from '../schemas/Notification';
 import Deliveryman from '../models/Deliveryman';
 
-import NewPackageMail from '../jobs/NewPackageMail';
+import DeliveryProblemMail from '../jobs/DeliveryProblemMail';
 import Queue from '../../lib/Queue';
 
-class PackageController {
-  // listagem de encomendas
+class DeliveryProblemController {
+  // listagem de encomendas com problemas
   async index(req, res) {
-    const pack = await Package.findAll({
-      where: { id: req.body.id },
+    const problem = await DeliveryProblem.findAll({
       attributes: [
         'id',
-        'product',
-        'recipient_id',
-        'deliveryman_id',
-        'signature_id',
-        'start_date',
-        'end_date',
-        'canceled_at',
+        'description',
+        'delivery_id',
+        'created_at',
+        'updated_at',
       ],
       include: [
         {
-          model: File,
-          as: 'signature',
-          attributes: ['name', 'path', 'url'],
-        },
-        {
-          model: Recipient,
-          as: 'recipient',
-          attributes: ['name'],
-        },
-        {
-          model: Deliveryman,
-          as: 'deliveryman',
-          attributes: ['name'],
+          model: Package,
+          as: 'delivery',
+          attributes: [
+            'id',
+            'product',
+            'recipient_id',
+            'deliveryman_id',
+            'start_date',
+            'canceled_at',
+          ],
         },
       ],
     });
 
-    return res.json(pack);
+    return res.json(problem);
   }
 
-  // cadastro de encomendas
+  async specific(req, res) {
+    const problem = await DeliveryProblem.findAll({
+      where: { delivery_id: req.params.id },
+      attributes: [
+        'id',
+        'description',
+        'delivery_id',
+        'created_at',
+        'updated_at',
+      ],
+      include: [
+        {
+          model: Package,
+          as: 'delivery',
+          attributes: [
+            'id',
+            'product',
+            'recipient_id',
+            'deliveryman_id',
+            'start_date',
+            'canceled_at',
+          ],
+        },
+      ],
+    });
+
+    return res.json(problem);
+  }
+
+  // cadastro de problemas
   async store(req, res) {
     const schema = Yup.object().shape({
-      recipient_id: Yup.number().required(),
-      deliveryman_id: Yup.number().required(),
-      product: Yup.string().required(),
+      description: Yup.string().required(),
     });
 
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
-    // pega dados enviados pela requisição
-    const { recipient_id, deliveryman_id, product } = req.body;
+    // pega dados enviados
+    const { description } = req.body;
+    const delivery_id = req.params.id;
 
-    const pack = await Package.create({
-      recipient_id,
-      deliveryman_id,
-      product,
+    // cria na base
+    const problem = await DeliveryProblem.create({
+      description,
+      delivery_id,
     });
 
-    // notificar entregador
-    await Notification.create({
-      content: `Nova entrega de ${product} disponivel para retirada`,
-      deliveryman: deliveryman_id,
-    });
-
-    const deliveryman = await Deliveryman.findByPk(deliveryman_id, {
-      attributes: ['name', 'email'],
-    });
-
-    const recipient = await Recipient.findByPk(recipient_id, {
-      attributes: ['name', 'street', 'number', 'state', 'city', 'zip'],
-    });
-
-    await Queue.add(NewPackageMail.key, {
-      deliveryman,
-      recipient,
-      product,
-    });
-
-    return res.json(pack);
+    return res.json(problem);
   }
 
   // update de encomendas
@@ -148,10 +150,11 @@ class PackageController {
     });
   }
 
-  // cancelamento de encomenda
+  // cancelamento de entrega
   async delete(req, res) {
     // procura na base a encomenda com o id passado na url
-    const pack = await Package.findByPk(req.params.id);
+    const problem = await DeliveryProblem.findByPk(req.params.id);
+    const pack = await Package.findByPk(problem.delivery_id);
 
     // avalia se a encomenda já foi cancelada
     if (pack.canceled_at) {
@@ -172,12 +175,27 @@ class PackageController {
 
     // notificar novo entregador
     await Notification.create({
-      content: `Sua entrega de ${pack.product} foi cancelada`,
+      content: `Sua entrega de ${pack.product} foi cancelada pelo seguinte motivo: ${problem.description}`,
       deliveryman: pack.deliveryman_id,
     });
 
-    return res.json(pack);
+    const deliveryman = await Deliveryman.findByPk(pack.deliveryman_id, {
+      attributes: ['name', 'email'],
+    });
+
+    const recipient = await Recipient.findByPk(pack.recipient_id, {
+      attributes: ['name', 'street', 'number', 'state', 'city', 'zip'],
+    });
+
+    await Queue.add(DeliveryProblemMail.key, {
+      problem,
+      pack,
+      deliveryman,
+      recipient,
+    });
+
+    return res.json(problem);
   }
 }
 
-export default new PackageController();
+export default new DeliveryProblemController();
