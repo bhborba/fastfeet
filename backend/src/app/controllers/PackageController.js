@@ -1,18 +1,34 @@
 import * as Yup from 'yup';
+import { Op } from 'sequelize';
 import Package from '../models/Package';
 import File from '../models/File';
 import Recipient from '../models/Recipient';
 import Notification from '../schemas/Notification';
 import Deliveryman from '../models/Deliveryman';
-
 import NewPackageMail from '../jobs/NewPackageMail';
 import Queue from '../../lib/Queue';
 
 class PackageController {
   // listagem de encomendas
   async index(req, res) {
+    const { product } = req.query;
+    let where;
+
+    if (product) {
+      where = {
+        end_date: null,
+        canceled_at: null,
+        product: { [Op.like]: `%${product}%` },
+      };
+    } else {
+      where = {
+        end_date: null,
+        canceled_at: null,
+      };
+    }
+
     const pack = await Package.findAll({
-      where: { id: req.body.id },
+      where,
       attributes: [
         'id',
         'product',
