@@ -6,6 +6,7 @@
 - React Dom
 - Reactotron
 - Yup (validação de dados)
+- Redux
 
 ### Informações importantes
 
