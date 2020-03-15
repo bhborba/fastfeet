@@ -47,6 +47,12 @@ export const Content = styled.div`
             }
         }
 
+        span {
+            color: #f64c75;
+            align-self: center;
+            margin: 0 0 10px;
+        }
+
         p {
             text-align: left;
             letter-spacing: 0;
