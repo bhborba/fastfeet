@@ -1,5 +1,12 @@
 # FastFeet - front-end web
 
+### **Um pouco sobre as ferramentas**
+- ESLint + Prettier + EditorConfig;
+- Rocketseat Unform
+- React Dom
+- Reactotron
+- Yup (validação de dados)
+
 ### Informações importantes
 
 1. Antes de cancelar encomendas ou deletar qualquer registro do banco crie uma verificação adicinal usando a função `confirm` do JavaScript;
