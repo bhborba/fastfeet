@@ -8,6 +8,8 @@
 - Yup (validação de dados)
 - Redux
 - Redux Persist (persistir autenticação)
+- React Toastify
+
 
 
 ### Informações importantes
