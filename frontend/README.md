@@ -7,6 +7,8 @@
 - Reactotron
 - Yup (validação de dados)
 - Redux
+- Redux Persist (persistir autenticação)
+
 
 ### Informações importantes
 
