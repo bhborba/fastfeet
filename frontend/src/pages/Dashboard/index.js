@@ -66,9 +66,7 @@ export default function Dashboard() {
                             <span>ENTREGUE</span>
                         </td>
                         <td className="lastCell">
-                            <button type="button">
-                                <MdMoreHoriz size={20} />
-                            </button>
+                            <DeliveryOptions />
                         </td>
                     </tr>
                     <br />

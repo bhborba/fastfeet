@@ -64,21 +64,19 @@ export const DeliverysTable = styled.table`
     border: none;
     margin-top: 22px;
     border-collapse: collapse;
-    border-spacing: 20px;
     thead th {
+        padding: 12px 25px;
         color: #444444;
         text-align: left;
-        padding: 12px;
-    }
-
-    tbody tr {
-        border-spacing: 20px;
     }
 
     tbody td {
-        padding: 12px;
         background: #ffffff;
         height: 57px;
+
+        span {
+            margin-left: 25px;
+        }
     }
     .firstCell {
         border-top-left-radius: 4px;
@@ -87,6 +85,14 @@ export const DeliverysTable = styled.table`
     .lastCell {
         border-top-right-radius: 4px;
         border-bottom-right-radius: 4px;
+        display: flex;
+        padding: 0 30px;
+        align-items: center;
+        button {
+            background: none;
+            border: 0;
+            color: #c6c6c6;
+        }
     }
     span {
         display: block;
@@ -98,16 +104,13 @@ export const DeliverysTable = styled.table`
         display: flex;
         align-items: center;
         img {
-            margin-right: 5px;
+            margin-left: 25px;
             height: 35px;
             border-radius: 50px;
         }
-    }
 
-    button {
-        background: none;
-        border: 0;
-        margin-left: 10px;
-        color: #c6c6c6;
+        span {
+            margin-left: 5px;
+        }
     }
 `;
