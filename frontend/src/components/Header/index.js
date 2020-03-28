@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 import logo from '~/assets/logo-header.svg';
 
@@ -11,7 +11,18 @@ export default function() {
             <Content>
                 <nav>
                     <img src={logo} alt="FastFeet" />
-                    <Link to="/dashboard">ENCOMENDAS</Link>
+                    <NavLink activeClassName="selected" to="/dashboard">
+                        ENCOMENDAS
+                    </NavLink>
+                    <NavLink activeClassName="selected" to="/deliverymans">
+                        ENTREGADORES
+                    </NavLink>
+                    <NavLink activeClassName="selected" to="/recipients">
+                        DESTINATÁRIOS
+                    </NavLink>
+                    <NavLink activeClassName="selected" to="/problems">
+                        PROBLEMAS
+                    </NavLink>
                 </nav>
 
                 <aside>

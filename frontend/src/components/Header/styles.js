@@ -23,9 +23,14 @@ export const Content = styled.div`
             border-right: 1px solid #eee;
         }
 
+        .selected {
+            color: #444444;
+        }
+
         a {
             font-weight: bold;
             color: #999999;
+            margin-right: 21px;
         }
     }
 

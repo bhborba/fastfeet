@@ -11,12 +11,30 @@ export default function Dashboard() {
     const [packs, setPacks] = useState([]);
 
     function verifyStatus(pack) {
-        if (pack.canceled_at) return 'CANCELADA';
-        if (pack.end_date) return 'ENTREGUE';
-        if (pack.start_date) {
-            return 'RETIRADA';
+        const statusProps = {
+            name: 'PENDENTE',
+            background: '#F0F0DF',
+            text: '#C1BC35',
+        };
+        if (pack.canceled_at) {
+            statusProps.name = 'CANCELADA';
+            statusProps.background = '#FAB0B0';
+            statusProps.text = '#DE3B3B';
+            return statusProps;
         }
-        return 'PENDENTE';
+        if (pack.end_date) {
+            statusProps.name = 'ENTREGUE';
+            statusProps.background = '#DFF0DF';
+            statusProps.text = '#2CA42B';
+            return statusProps;
+        }
+        if (pack.start_date) {
+            statusProps.name = 'RETIRADA';
+            statusProps.background = '#BAD2FF';
+            statusProps.text = '#4D85EE';
+            return statusProps;
+        }
+        return statusProps;
     }
 
     useEffect(() => {
@@ -62,43 +80,64 @@ export default function Dashboard() {
                     </tr>
                 </thead>
                 <tbody>
-                    {packs.map(pack => (
-                        <>
-                            <tr key={pack.id}>
-                                <td className="firstCell">
-                                    <span>{pack.id}</span>
-                                </td>
-                                <td>
-                                    <span>{pack.recipient.name}</span>
-                                </td>
-                                <td>
-                                    <div className="deliveryMan">
-                                        <img
-                                            src={pack.deliveryman.avatar.url}
-                                            alt="Avatar"
-                                        />
-                                        <span>{pack.deliveryman.name}</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <span>{pack.recipient.city}</span>
-                                </td>
-                                <td>
-                                    <span>{pack.recipient.state}</span>
-                                </td>
-                                <td>
-                                    <div className="status">
-                                        <span className="ball" />
-                                        <span>{verifyStatus(pack)}</span>
-                                    </div>
-                                </td>
-                                <td className="lastCell">
-                                    <DeliveryOptions />
-                                </td>
-                            </tr>
-                            <br />
-                        </>
-                    ))}
+                    {packs.map(pack => {
+                        const status = verifyStatus(pack);
+                        return (
+                            <>
+                                <tr key={pack.id}>
+                                    <td className="firstCell">
+                                        <span>{pack.id}</span>
+                                    </td>
+                                    <td>
+                                        <span>{pack.recipient.name}</span>
+                                    </td>
+                                    <td>
+                                        <div className="deliveryMan">
+                                            <img
+                                                src={
+                                                    pack.deliveryman.avatar.url
+                                                }
+                                                alt="Avatar"
+                                            />
+                                            <span>{pack.deliveryman.name}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span>{pack.recipient.city}</span>
+                                    </td>
+                                    <td>
+                                        <span>{pack.recipient.state}</span>
+                                    </td>
+                                    <td>
+                                        <div
+                                            className="status"
+                                            style={{
+                                                background: status.background,
+                                            }}
+                                        >
+                                            <span
+                                                style={{
+                                                    background: status.text,
+                                                }}
+                                                className="ball"
+                                            />
+                                            <span
+                                                style={{
+                                                    color: status.text,
+                                                }}
+                                            >
+                                                <p>{status.name}</p>
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td className="lastCell">
+                                        <DeliveryOptions />
+                                    </td>
+                                </tr>
+                                <br />
+                            </>
+                        );
+                    })}
                 </tbody>
             </DeliverysTable>
         </Container>
