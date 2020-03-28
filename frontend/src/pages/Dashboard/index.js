@@ -1,12 +1,34 @@
-import React from 'react';
-import { MdSearch, MdAdd, MdMoreHoriz } from 'react-icons/md';
+import React, { useState, useEffect } from 'react';
+import { MdSearch, MdAdd } from 'react-icons/md';
 
 import DeliveryOptions from '~/components/DeliveryOptions';
+
 import api from '~/services/api';
 
 import { Container, Form, DeliverysTable } from './styles';
 
 export default function Dashboard() {
+    const [packs, setPacks] = useState([]);
+
+    function verifyStatus(pack) {
+        if (pack.canceled_at) return 'CANCELADA';
+        if (pack.end_date) return 'ENTREGUE';
+        if (pack.start_date) {
+            return 'RETIRADA';
+        }
+        return 'PENDENTE';
+    }
+
+    useEffect(() => {
+        async function loadPackages() {
+            const response = await api.get('packages');
+
+            setPacks(response.data);
+        }
+
+        loadPackages();
+    }, []);
+
     return (
         <Container>
             <header>
@@ -40,65 +62,43 @@ export default function Dashboard() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td className="firstCell">
-                            <span>#01</span>
-                        </td>
-                        <td>
-                            <span>Ludwig van Beethoven</span>
-                        </td>
-                        <td>
-                            <div className="deliveryMan">
-                                <img
-                                    src="https://api.adorable.io/avatars/54/abott@adorable.png"
-                                    alt="foto"
-                                />
-                                <span>John Doe</span>
-                            </div>
-                        </td>
-                        <td>
-                            <span>Rio do Sul</span>
-                        </td>
-                        <td>
-                            <span>Santa Catarina</span>
-                        </td>
-                        <td>
-                            <span>ENTREGUE</span>
-                        </td>
-                        <td className="lastCell">
-                            <DeliveryOptions />
-                        </td>
-                    </tr>
-                    <br />
-                    <tr>
-                        <td className="firstCell">
-                            <span>#01</span>
-                        </td>
-                        <td>
-                            <span>Ludwig van Beethoven</span>
-                        </td>
-                        <td>
-                            <div className="deliveryMan">
-                                <img
-                                    src="https://api.adorable.io/avatars/54/abott@adorable.png"
-                                    alt="foto"
-                                />
-                                <span>John Doe</span>
-                            </div>
-                        </td>
-                        <td>
-                            <span>Rio do Sul</span>
-                        </td>
-                        <td>
-                            <span>Santa Catarina</span>
-                        </td>
-                        <td>
-                            <span>ENTREGUE</span>
-                        </td>
-                        <td className="lastCell">
-                            <DeliveryOptions />
-                        </td>
-                    </tr>
+                    {packs.map(pack => (
+                        <>
+                            <tr key={pack.id}>
+                                <td className="firstCell">
+                                    <span>{pack.id}</span>
+                                </td>
+                                <td>
+                                    <span>{pack.recipient.name}</span>
+                                </td>
+                                <td>
+                                    <div className="deliveryMan">
+                                        <img
+                                            src={pack.deliveryman.avatar.url}
+                                            alt="Avatar"
+                                        />
+                                        <span>{pack.deliveryman.name}</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span>{pack.recipient.city}</span>
+                                </td>
+                                <td>
+                                    <span>{pack.recipient.state}</span>
+                                </td>
+                                <td>
+                                    <div className="status">
+                                        <span className="ball" />
+                                        <span>{verifyStatus(pack)}</span>
+                                    </div>
+                                </td>
+                                <td className="lastCell">
+                                    <DeliveryOptions />
+                                </td>
+                            </tr>
+                            <br />
+                        </>
+                    ))}
                 </tbody>
             </DeliverysTable>
         </Container>

@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 
 import logo from '~/assets/logo-header.svg';
 
-import DeliveryOptions from '~/components/DeliveryOptions';
-
 import { Container, Content, Profile } from './styles';
 
 export default function() {
@@ -17,7 +15,6 @@ export default function() {
                 </nav>
 
                 <aside>
-                    <DeliveryOptions />
                     <Profile>
                         <div>
                             <strong>Admin da FastFeet</strong>

@@ -20,12 +20,12 @@ class PackageController {
         canceled_at: null,
         product: { [Op.like]: `%${q}%` },
       };
-    } else {
+    } /* else {
       where = {
         end_date: null,
         canceled_at: null,
-      };
-    }
+      }; */
+    // }
 
     const pack = await Package.findAll({
       where,
@@ -48,12 +48,19 @@ class PackageController {
         {
           model: Recipient,
           as: 'recipient',
-          attributes: ['name'],
+          attributes: ['name', 'city', 'state'],
         },
         {
           model: Deliveryman,
           as: 'deliveryman',
-          attributes: ['name'],
+          attributes: ['name', 'avatar_id'],
+          include: [
+            {
+              model: File,
+              as: 'avatar',
+              attributes: ['name', 'path', 'url'],
+            },
+          ],
         },
       ],
     });

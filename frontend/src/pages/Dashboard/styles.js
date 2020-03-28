@@ -78,6 +78,35 @@ export const DeliverysTable = styled.table`
             margin-left: 25px;
         }
     }
+
+    .status {
+        display: inline-flex;
+        align-items: center;
+        padding: 6px;
+        background: #dff0df;
+        margin-left: 25px;
+        border-radius: 12px;
+
+        .ball {
+            margin-bottom: 2px;
+            width: 10px;
+            height: 10px;
+            background: #2ca42b;
+            margin-left: 6px;
+            border-radius: 50%;
+        }
+
+        span {
+            margin-top: 2px;
+            margin-left: 6px;
+            margin-right: 6px;
+            font-weight: bold;
+            color: #2ca42b;
+            font-size: 14px;
+            vertical-align: middle;
+        }
+    }
+
     .firstCell {
         border-top-left-radius: 4px;
         border-bottom-left-radius: 4px;
