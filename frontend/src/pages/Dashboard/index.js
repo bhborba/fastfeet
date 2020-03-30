@@ -9,6 +9,7 @@ import { Container, Form, DeliverysTable } from './styles';
 
 export default function Dashboard() {
     const [packs, setPacks] = useState([]);
+    const [search, setSearch] = useState('');
 
     function verifyStatus(pack) {
         const statusProps = {
@@ -47,14 +48,28 @@ export default function Dashboard() {
         loadPackages();
     }, []);
 
+    async function handleSearch(e) {
+        e.preventDefault();
+
+        const response = await api.get('packages', {
+            params: {
+                q: search,
+            },
+        });
+
+        setPacks(response.data);
+    }
+
     return (
         <Container>
             <header>
                 <h1>Gerenciando encomendas</h1>
                 <div>
-                    <Form onSubmit={() => {}}>
+                    <Form onSubmit={handleSearch}>
                         <MdSearch color="#999999" size={20} />
                         <input
+                            value={search}
+                            onChange={e => setSearch(e.target.value)}
                             name="search"
                             type="search"
                             placeholder="Buscar por encomendas"
