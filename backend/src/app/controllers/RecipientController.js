@@ -10,7 +10,7 @@ class RecipientController {
 
     if (q) {
       where = {
-        produto: { [Op.like]: `%${q}%` },
+        name: { [Op.like]: `%${q}%` },
       };
     }
     const recipients = await Recipient.findAll({
