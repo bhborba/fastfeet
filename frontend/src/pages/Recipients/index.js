@@ -61,7 +61,7 @@ export default function Recipients() {
                         <th>ID</th>
                         <th>Nome</th>
                         <th>Endereço</th>
-                        <th>Ações</th>
+                        <th className="lastTh">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -83,7 +83,9 @@ export default function Recipients() {
                                         </span>
                                     </td>
                                     <td className="lastCell">
-                                        <DeliverymanOptions />
+                                        <div className="options">
+                                            <DeliverymanOptions />
+                                        </div>
                                     </td>
                                 </tr>
                                 <br />

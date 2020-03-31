@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { MdMoreHoriz, MdDeleteForever } from 'react-icons/md';
 import { IoMdEye } from 'react-icons/io';
 
-import { Container, Badge, OptionList, Option } from './styles';
+import { Container, Badge, OptionList, Option, Container2 } from './styles';
 
 export default function ProblemOptions() {
     const [visible, setVisible] = useState(false);
@@ -18,16 +18,18 @@ export default function ProblemOptions() {
                 <MdMoreHoriz color="#c6c6c6" size={20} />
             </Badge>
 
-            <OptionList visible={visible}>
-                <Option>
-                    <IoMdEye className="icon" color="#8E5BE8" />
-                    <button type="button">Visualizar</button>
-                </Option>
-                <Option>
-                    <MdDeleteForever className="icon" color="#DE3B3B" />
-                    <button type="button">Cancelar encomenda</button>
-                </Option>
-            </OptionList>
+            <Container2>
+                <OptionList onClick={handleToggleVisible} visible={visible}>
+                    <Option>
+                        <IoMdEye className="icon" color="#8E5BE8" />
+                        <button type="button">Visualizar</button>
+                    </Option>
+                    <Option>
+                        <MdDeleteForever className="icon" color="#DE3B3B" />
+                        <button type="button">Cancelar encomenda</button>
+                    </Option>
+                </OptionList>
+            </Container2>
         </Container>
     );
 }

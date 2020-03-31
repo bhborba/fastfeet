@@ -62,7 +62,7 @@ export default function Deliverymans() {
                         <th>Foto</th>
                         <th>Nome</th>
                         <th>Email</th>
-                        <th className="lastAlign">Ações</th>
+                        <th className="lastTh">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -88,7 +88,9 @@ export default function Deliverymans() {
                                         <span>{deliveryman.email}</span>
                                     </td>
                                     <td className="lastCell">
-                                        <DeliverymanOptions />
+                                        <div className="options">
+                                            <DeliverymanOptions />
+                                        </div>
                                     </td>
                                 </tr>
                                 <br />

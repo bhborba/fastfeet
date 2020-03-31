@@ -70,6 +70,10 @@ export const DeliverymansTable = styled.table`
         text-align: left;
     }
 
+    .lastTh {
+        text-align: right;
+    }
+
     tbody td {
         background: #ffffff;
         height: 57px;
@@ -112,16 +116,16 @@ export const DeliverymansTable = styled.table`
     .lastCell {
         border-top-right-radius: 4px;
         border-bottom-right-radius: 4px;
-        display: flex;
+
         align-items: center;
-        align-content: center;
-        padding: 0 30px;
-        div {
-            button {
-                background: none;
-                border: 0;
-                color: #c6c6c6;
-            }
+        .options {
+            text-align: right;
+            margin-right: 28px;
+        }
+        button {
+            background: none;
+            border: 0;
+            color: #c6c6c6;
         }
     }
     span {

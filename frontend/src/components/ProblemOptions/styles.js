@@ -1,15 +1,24 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
-    position: absolute;
+export const Container = styled.div``;
+
+export const Badge = styled.button`
+    border: 0;
+
+    p {
+        display: block;
+    }
 `;
 
-export const Badge = styled.button``;
+export const Container2 = styled.div`
+    position: relative;
+`;
 
 export const OptionList = styled.div`
+    text-align: left;
     position: absolute;
     width: 200px;
-    left: calc(50% - 75px);
+    left: calc(95% - 100px);
     top: calc(100% + 10px);
     background: #ffffff;
     border-radius: 4px;
@@ -42,6 +51,7 @@ export const Option = styled.div`
     }
 
     button {
+        position: absolute;
         font-size: 16px;
     }
 `;

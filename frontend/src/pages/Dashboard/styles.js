@@ -69,6 +69,9 @@ export const DeliverysTable = styled.table`
         color: #444444;
         text-align: left;
     }
+    .lastTh {
+        text-align: right;
+    }
 
     tbody td {
         background: #ffffff;
@@ -112,9 +115,12 @@ export const DeliverysTable = styled.table`
     .lastCell {
         border-top-right-radius: 4px;
         border-bottom-right-radius: 4px;
-        display: flex;
-        padding: 0 30px;
+
         align-items: center;
+        .options {
+            text-align: right;
+            margin-right: 28px;
+        }
         button {
             background: none;
             border: 0;

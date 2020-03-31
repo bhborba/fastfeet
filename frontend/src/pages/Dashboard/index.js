@@ -91,7 +91,7 @@ export default function Dashboard() {
                         <th>Cidade</th>
                         <th>Estado</th>
                         <th>Status</th>
-                        <th>Ações</th>
+                        <th className="lastTh">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -146,7 +146,9 @@ export default function Dashboard() {
                                         </div>
                                     </td>
                                     <td className="lastCell">
-                                        <DeliveryOptions />
+                                        <div className="options">
+                                            <DeliveryOptions />
+                                        </div>
                                     </td>
                                 </tr>
                                 <br />

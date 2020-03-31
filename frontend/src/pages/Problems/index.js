@@ -30,7 +30,7 @@ export default function Problems() {
                     <tr>
                         <th>Encomenda</th>
                         <th>Problema</th>
-                        <th>Ações</th>
+                        <th className="lastTh">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,7 +45,9 @@ export default function Problems() {
                                         <span>{problem.description}</span>
                                     </td>
                                     <td className="lastCell">
-                                        <ProblemOptions />
+                                        <div className="options">
+                                            <ProblemOptions />
+                                        </div>
                                     </td>
                                 </tr>
                                 <br />
