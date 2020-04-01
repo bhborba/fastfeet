@@ -147,7 +147,7 @@ export default function Dashboard() {
                                     </td>
                                     <td className="lastCell">
                                         <div className="options">
-                                            <DeliveryOptions />
+                                            <DeliveryOptions data={pack} />
                                         </div>
                                     </td>
                                 </tr>

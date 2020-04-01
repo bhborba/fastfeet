@@ -26,6 +26,11 @@ export const OptionList = styled.div`
     display: ${props => (props.visible ? 'block' : 'none')};
     box-shadow: 0px 0px 2px #00000026;
 
+    div {
+        display: flex;
+        align-items: center;
+    }
+
     &::before {
         content: '';
         position: absolute;
@@ -51,7 +56,6 @@ export const Option = styled.div`
     }
 
     button {
-        position: absolute;
         font-size: 16px;
     }
 `;
