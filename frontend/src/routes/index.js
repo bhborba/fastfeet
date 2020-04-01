@@ -6,6 +6,7 @@ import SignIn from '../pages/SignIn';
 
 import SignUp from '../pages/SignUp';
 import Dashboard from '../pages/Dashboard';
+import PackageEdit from '../pages/PackageEdit';
 import Deliverymans from '../pages/Deliverymans';
 import Recipients from '../pages/Recipients';
 import Problems from '../pages/Problems';
@@ -17,7 +18,8 @@ export default function Routes() {
             <Route path="/" exact component={SignIn} />
 
             <Route path="/register" component={SignUp} isPrivate />
-            <Route path="/dashboard" component={Dashboard} isPrivate />
+            <Route path="/dashboard" exact component={Dashboard} isPrivate />
+            <Route path="/packages/edit" component={PackageEdit} isPrivate />
             <Route path="/deliverymans" component={Deliverymans} isPrivate />
             <Route path="/recipients" component={Recipients} isPrivate />
             <Route path="/problems" component={Problems} isPrivate />
