@@ -53,25 +53,45 @@ export const PackageDetails = styled.div`
     background: #ffffff;
     padding: 30px;
     border-radius: 4px;
-
+    p {
+        margin-bottom: 9px;
+        color: #444444;
+        font-size: 14px;
+    }
     .selectForm {
         display: flex;
         justify-content: space-between;
         margin-bottom: 16px;
         div {
             width: 48%;
-            p {
-                margin-bottom: 9px;
-                color: #444444;
-                font-size: 14px;
-            }
             div {
                 width: unset;
             }
         }
     }
 
-    input {
+    .product {
         width: 100%;
+        height: 45px;
+        padding: 12px 15px;
+        border-radius: 4px;
+        border: 1px solid #dddddd;
+        color: #999999;
+        font-size: 16px;
     }
 `;
+
+export const selectStyles = {
+    placeholder: () => ({
+        fontSize: 16,
+        color: '#999999',
+    }),
+
+    input: () => ({
+        height: 45,
+        fontSize: 16,
+        color: '#999999',
+    }),
+
+    indicatorSeparator: () => null,
+};

@@ -4,6 +4,7 @@ import { utcToZonedTime } from 'date-fns-tz';
 import { MdMoreHoriz, MdEdit, MdDeleteForever } from 'react-icons/md';
 import { IoMdEye } from 'react-icons/io';
 
+import history from '~/services/history';
 import {
     Container,
     Badge,
@@ -23,6 +24,14 @@ export default function DeliveryOptions(pack) {
 
     function handleView() {
         setModalOpen(!modalOpen);
+    }
+
+    function handleEdit() {
+        const { recipient, deliveryman, product } = pack.data;
+        history.push({
+            pathname: '/packages/edit',
+            state: { recipient, deliveryman, product },
+        });
     }
 
     function convertDate(date) {
@@ -118,7 +127,9 @@ export default function DeliveryOptions(pack) {
                     </Option>
                     <Option>
                         <MdEdit className="icon" color="#4D85EE" />
-                        <button type="button">Editar</button>
+                        <button type="button" onClick={handleEdit}>
+                            Editar
+                        </button>
                     </Option>
                     <Option>
                         <MdDeleteForever className="icon" color="#DE3B3B" />
