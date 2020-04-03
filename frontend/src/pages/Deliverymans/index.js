@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { MdSearch, MdAdd } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 
 import DeliverymanOptions from '~/components/DeliverymanOptions';
 
@@ -48,10 +49,14 @@ export default function Deliverymans() {
                             placeholder="Buscar por entregadores"
                         />
                     </Form>
-                    <button type="button">
+                    <Link
+                        className="button"
+                        to="deliverymans/add"
+                        type="button"
+                    >
                         <MdAdd color="#FFFFFF" size={20} />
                         CADASTRAR
-                    </button>
+                    </Link>
                 </div>
             </header>
 
