@@ -41,6 +41,20 @@ export const Container = styled.div`
 
             .back {
                 background: #cccccc;
+                margin-top: 9px;
+                justify-content: center;
+                align-items: center;
+                display: flex;
+                font-size: 14px;
+                font-weight: bold;
+                color: #ffffff;
+                width: 112px;
+                height: 36px;
+                border: 0;
+                border-radius: 4px;
+                svg {
+                    margin-right: 7px;
+                }
             }
         }
     }

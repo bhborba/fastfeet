@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { MdKeyboardArrowLeft, MdCheck } from 'react-icons/md';
-import { Form, Input, useField } from '@rocketseat/unform';
-import Select from 'react-select';
-import { useLocation } from 'react-router-dom';
+import { Form } from '@unform/web';
+import { useLocation, Link } from 'react-router-dom';
+
+import { editRequest } from '~/store/modules/packs/actions';
+import Select from '~/components/Select';
+import Input from '~/components/Input';
 
 import api from '~/services/api';
 
 import { Container, PackageDetails, selectStyles } from './styles';
 
 export default function PackageEdit() {
-    function handleSubmit(data) {
-        console.log(data);
-    }
-
+    const dispatch = useDispatch();
     const location = useLocation();
     const [recipients, setRecipients] = useState([]);
     const [deliverymans, setDeliverymans] = useState([]);
@@ -33,11 +34,11 @@ export default function PackageEdit() {
         }
 
         loadDeliverymans();
-
-        console.log(location.state.recipient);
-        console.log(location.state.deliveryman);
-        console.log(location.state.product);
     }, [location]);
+
+    async function handleSubmit(formValues) {
+        dispatch(editRequest(formValues));
+    }
 
     const recipientOptions = recipients.map(recipient => {
         return { value: recipient.id, label: recipient.name };
@@ -53,10 +54,10 @@ export default function PackageEdit() {
                 <header>
                     <h1>Edição de encomendas</h1>
                     <div>
-                        <button className="back" type="button">
+                        <Link className="back" type="button" to="/dashboard">
                             <MdKeyboardArrowLeft color="#FFFFFF" size={20} />
                             VOLTAR
-                        </button>
+                        </Link>
                         <button className="save" type="submit">
                             <MdCheck color="#FFFFFF" size={20} />
                             SALVAR
@@ -68,7 +69,9 @@ export default function PackageEdit() {
                     <div className="selectForm">
                         <div>
                             <p>Destinatário</p>
+
                             <Select
+                                name="recipient"
                                 className="select"
                                 options={recipientOptions}
                                 styles={selectStyles}
@@ -81,6 +84,7 @@ export default function PackageEdit() {
                         <div>
                             <p>Entregador</p>
                             <Select
+                                name="deliveryman"
                                 className="select"
                                 options={deliveryMansOptions}
                                 styles={selectStyles}
@@ -97,6 +101,7 @@ export default function PackageEdit() {
                         name="product"
                         placeholder="Produto"
                     />
+                    <Input name="id" type="hidden" />
                 </PackageDetails>
             </Form>
         </Container>

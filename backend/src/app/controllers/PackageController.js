@@ -116,8 +116,8 @@ class PackageController {
   async update(req, res) {
     // define como devem ser os dados informados
     const schema = Yup.object().shape({
-      recipient_id: Yup.number().required(),
-      deliveryman_id: Yup.number().required(),
+      recipient_id: Yup.number(),
+      deliveryman_id: Yup.number(),
       product: Yup.string().required(),
       signature_id: Yup.number(),
       start_date: Yup.date(),
@@ -133,7 +133,7 @@ class PackageController {
     // procura na base de dados a encomenda que deve ser editada
     const pack = await Package.findByPk(req.params.id);
 
-    const { deliveryman_id, product } = req.body;
+    const { recipient_id, deliveryman_id, product } = req.body;
 
     // valida se houve mudança no entregador
     if (deliveryman_id && deliveryman_id !== pack.deliveryman_id) {
@@ -150,9 +150,13 @@ class PackageController {
       });
     }
 
+    /* // valida se houve mudança no entregador
+        if (recipient_id && recipient_id !== pack.recipient_id) {
+            return
+        } */
+
     // atualiza os dados na base
     const {
-      recipient_id,
       signature_id,
       start_date,
       end_date,

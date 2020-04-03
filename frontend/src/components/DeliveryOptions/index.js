@@ -27,10 +27,10 @@ export default function DeliveryOptions(pack) {
     }
 
     function handleEdit() {
-        const { recipient, deliveryman, product } = pack.data;
+        const { recipient, deliveryman, product, id } = pack.data;
         history.push({
             pathname: '/packages/edit',
-            state: { recipient, deliveryman, product },
+            state: { recipient, deliveryman, product, id },
         });
     }
 
