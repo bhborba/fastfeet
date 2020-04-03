@@ -16,3 +16,22 @@ export function editFailure() {
         type: '@package/EDIT_FAILURE',
     };
 }
+
+export function addRequest(recipient, deliveryman, product) {
+    return {
+        type: '@package/ADD_REQUEST',
+        payload: { recipient, deliveryman, product },
+    };
+}
+
+export function addSuccess() {
+    return {
+        type: '@package/ADD_SUCCESS',
+    };
+}
+
+export function addFailure() {
+    return {
+        type: '@package/ADD_FAILURE',
+    };
+}

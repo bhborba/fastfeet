@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 
 import api from '~/services/api';
 
-import { editSuccess, editFailure } from './actions';
+import { editSuccess, editFailure, addSuccess, addFailure } from './actions';
 
 export function* edit({ payload }) {
     try {
@@ -26,4 +26,26 @@ export function* edit({ payload }) {
     }
 }
 
-export default all([takeLatest('@package/EDIT_REQUEST', edit)]);
+export function* add({ payload }) {
+    try {
+        const values = {
+            product: payload.product,
+            deliveryman_id: payload.deliveryman,
+            recipient_id: payload.recipient,
+        };
+
+        yield call(api.post, 'packages', values);
+
+        toast.success('Encomenda cadastrada com sucesso!');
+
+        yield put(addSuccess());
+    } catch (err) {
+        toast.error('Erro ao cadastrar encomenda, confira os dados');
+        yield put(addFailure());
+    }
+}
+
+export default all([
+    takeLatest('@package/EDIT_REQUEST', edit),
+    takeLatest('@package/ADD_REQUEST', add),
+]);

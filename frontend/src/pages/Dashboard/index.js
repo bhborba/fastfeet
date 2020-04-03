@@ -102,7 +102,7 @@ export default function Dashboard() {
                             <>
                                 <tr key={pack.id}>
                                     <td className="firstCell">
-                                        <span>{pack.id}</span>
+                                        <span>#{pack.id}</span>
                                     </td>
                                     <td>
                                         <span>{pack.recipient.name}</span>

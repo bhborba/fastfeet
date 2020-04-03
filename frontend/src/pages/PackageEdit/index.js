@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { MdKeyboardArrowLeft, MdCheck } from 'react-icons/md';
 import { Form } from '@unform/web';
 import { useLocation, Link } from 'react-router-dom';
+
+import { MdKeyboardArrowLeft, MdCheck } from 'react-icons/md';
+import { Container, PackageDetails, selectStyles } from './styles';
 
 import { editRequest } from '~/store/modules/packs/actions';
 import Select from '~/components/Select';
 import Input from '~/components/Input';
 
 import api from '~/services/api';
-
-import { Container, PackageDetails, selectStyles } from './styles';
 
 export default function PackageEdit() {
     const dispatch = useDispatch();
