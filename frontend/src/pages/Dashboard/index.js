@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { MdSearch, MdAdd } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 
 import DeliveryOptions from '~/components/DeliveryOptions';
 
@@ -75,10 +76,10 @@ export default function Dashboard() {
                             placeholder="Buscar por encomendas"
                         />
                     </Form>
-                    <button type="button">
+                    <Link className="button" to="/packages/add" type="button">
                         <MdAdd color="#FFFFFF" size={20} />
                         CADASTRAR
-                    </button>
+                    </Link>
                 </div>
             </header>
 

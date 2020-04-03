@@ -150,11 +150,6 @@ class PackageController {
       });
     }
 
-    /* // valida se houve mudança no entregador
-        if (recipient_id && recipient_id !== pack.recipient_id) {
-            return
-        } */
-
     // atualiza os dados na base
     const {
       signature_id,
@@ -180,22 +175,7 @@ class PackageController {
     // procura na base a encomenda com o id passado na url
     const pack = await Package.findByPk(req.params.id);
 
-    // avalia se a encomenda já foi cancelada
-    if (pack.canceled_at) {
-      return res.status(400).json({ error: 'Package already canceled' });
-    }
-
-    // avalia se encomenda já foi entregue
-    if (pack.end_date) {
-      return res
-        .status(400)
-        .json({ error: 'This package has been delivered already' });
-    }
-
-    // define a data de cancelamento
-    pack.canceled_at = new Date();
-
-    await pack.save();
+    await pack.destroy();
 
     // notificar novo entregador
     await Notification.create({
@@ -203,7 +183,7 @@ class PackageController {
       deliveryman: pack.deliveryman_id,
     });
 
-    return res.json(pack);
+    return res.json('Package deleted :c');
   }
 }
 

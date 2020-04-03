@@ -4,6 +4,8 @@ import { utcToZonedTime } from 'date-fns-tz';
 import { MdMoreHoriz, MdEdit, MdDeleteForever } from 'react-icons/md';
 import { IoMdEye } from 'react-icons/io';
 
+import api from '~/services/api';
+
 import history from '~/services/history';
 import {
     Container,
@@ -32,6 +34,17 @@ export default function DeliveryOptions(pack) {
             pathname: '/packages/edit',
             state: { recipient, deliveryman, product, id },
         });
+    }
+
+    async function handleDelete(id) {
+        if (window.confirm('Tem certeza que deseja cancelar essa encomenda?')) {
+            try {
+                await api.delete(`packages/${id}`);
+            } catch (err) {
+                alert('Erro ao deletar caso, tente novamente.');
+            }
+            history.go(0);
+        }
     }
 
     function convertDate(date) {
@@ -133,7 +146,12 @@ export default function DeliveryOptions(pack) {
                     </Option>
                     <Option>
                         <MdDeleteForever className="icon" color="#DE3B3B" />
-                        <button type="button">Excluir</button>
+                        <button
+                            type="button"
+                            onClick={() => handleDelete(pack.data.id)}
+                        >
+                            Excluir
+                        </button>
                     </Option>
                 </OptionList>
             </Container2>
