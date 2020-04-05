@@ -1,7 +1,7 @@
-export function editRequest(name, email, avatarId) {
+export function editRequest(id, name, email, avatarId) {
     return {
         type: '@user/EDIT_REQUEST',
-        payload: { name, email, avatarId },
+        payload: { id, name, email, avatarId },
     };
 }
 

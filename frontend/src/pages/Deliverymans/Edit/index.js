@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
 
 import { MdKeyboardArrowLeft, MdCheck } from 'react-icons/md';
@@ -9,22 +9,19 @@ import AvatarInput from '~/components/AvatarInput';
 
 import { Container, DeliverymanDetails } from './styles';
 
-import { addRequest } from '~/store/modules/user/actions';
-import history from '~/services/history';
+import { editRequest } from '~/store/modules/user/actions';
 
-export default function DeliverymanAdd() {
+export default function Edit() {
     const dispatch = useDispatch();
+    const location = useLocation();
 
-    function handleSubmit({ name, email, avatar_id }) {
-        dispatch(addRequest(name, email, avatar_id));
-        history.push({
-            pathname: '/deliverymans',
-        });
+    function handleSubmit({ id, name, email, avatar_id }) {
+        dispatch(editRequest(id, name, email, avatar_id));
     }
 
     return (
         <Container>
-            <Form onSubmit={handleSubmit}>
+            <Form initialData={location.state} onSubmit={handleSubmit}>
                 <header>
                     <h1>Cadastro de entregadores</h1>
                     <div>
@@ -52,6 +49,7 @@ export default function DeliverymanAdd() {
                             />
                         </div>
                     </div>
+                    <Input name="id" type="hidden" />
                 </DeliverymanDetails>
             </Form>
         </Container>

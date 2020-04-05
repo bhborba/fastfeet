@@ -7,7 +7,7 @@ import { editSuccess, editFailure, addSuccess, addFailure } from './actions';
 
 export function* edit({ payload }) {
     try {
-        const { id } = payload.data;
+        const { id } = payload;
 
         const newValues = {
             name: payload.name,
@@ -17,11 +17,11 @@ export function* edit({ payload }) {
 
         yield call(api.put, `deliverymans/${id}`, newValues);
 
-        toast.success('Encomenda atualizada com sucesso!');
+        toast.success('Entregador atualizado com sucesso!');
 
         yield put(editSuccess());
     } catch (err) {
-        toast.error('Erro ao atualizar encomenda, confira os dados');
+        toast.error('Erro ao atualizar entregador, confira os dados');
         yield put(editFailure());
     }
 }

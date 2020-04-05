@@ -10,7 +10,9 @@ import PackageEdit from '../pages/PackageEdit';
 import PackageAdd from '../pages/PackageAdd';
 import Deliverymans from '../pages/Deliverymans';
 import DeliverymanAdd from '../pages/DeliverymanAdd';
+import DeliverymanEdit from '../pages/Deliverymans/Edit';
 import Recipients from '../pages/Recipients';
+import RecipientsAdd from '../pages/Recipients/Add';
 import Problems from '../pages/Problems';
 import Profile from '../pages/Profile';
 
@@ -34,7 +36,13 @@ export default function Routes() {
                 component={DeliverymanAdd}
                 isPrivate
             />
-            <Route path="/recipients" component={Recipients} isPrivate />
+            <Route
+                path="/deliverymans/edit"
+                component={DeliverymanEdit}
+                isPrivate
+            />
+            <Route path="/recipients" exact component={Recipients} isPrivate />
+            <Route path="/recipients/add" component={RecipientsAdd} isPrivate />
             <Route path="/problems" component={Problems} isPrivate />
             <Route path="/profile" component={Profile} isPrivate />
         </Switch>

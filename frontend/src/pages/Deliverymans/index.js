@@ -94,7 +94,9 @@ export default function Deliverymans() {
                                     </td>
                                     <td className="lastCell">
                                         <div className="options">
-                                            <DeliverymanOptions />
+                                            <DeliverymanOptions
+                                                data={deliveryman}
+                                            />
                                         </div>
                                     </td>
                                 </tr>

@@ -15,7 +15,7 @@ export const Container = styled.div`
             margin-top: 34px;
             display: flex;
             justify-content: space-between;
-            button {
+            .button {
                 margin-top: 9px;
                 justify-content: center;
                 align-items: center;
