@@ -67,7 +67,7 @@ class RecipientController {
   async update(req, res) {
     // define como devem ser os dados informados
     const schema = Yup.object().shape({
-      name: Yup.string(),
+      name: Yup.string().required(),
       street: Yup.string().required(),
       number: Yup.string().required(),
       complement: Yup.string(),
@@ -82,7 +82,7 @@ class RecipientController {
     }
 
     // procura na base de dados o usuário que deve ser editado
-    const recipient = await Recipient.findByPk(req.recipientId);
+    const recipient = await Recipient.findByPk(req.params.id);
 
     // atualiza os dados na base
     const { id, name, street, number, zip, state } = await recipient.update(

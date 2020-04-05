@@ -14,19 +14,20 @@ export default function Options(recipients) {
     }
 
     function handleEdit() {
-        const { id, name, product, email, avatar } = recipients.data;
         history.push({
-            pathname: '/recipientss/edit',
-            state: { id, name, product, email, avatar },
+            pathname: '/recipients/edit',
+            state: recipients.data,
         });
     }
 
     async function handleDelete(id) {
-        if (window.confirm('Tem certeza que deseja deletar esse entregador?')) {
+        if (
+            window.confirm('Tem certeza que deseja deletar esse destinatátio?')
+        ) {
             try {
                 await api.delete(`recipientss/${id}`);
             } catch (err) {
-                alert('Erro ao deletar entregador, tente novamente.');
+                alert('Erro ao deletar destinatátio, tente novamente.');
             }
             history.go(0);
         }

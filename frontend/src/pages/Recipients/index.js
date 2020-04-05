@@ -85,7 +85,7 @@ export default function Recipients() {
                                     </td>
                                     <td className="lastCell">
                                         <div className="options">
-                                            <Options />
+                                            <Options data={recipient} />
                                         </div>
                                     </td>
                                 </tr>

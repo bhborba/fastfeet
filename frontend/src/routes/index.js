@@ -13,6 +13,7 @@ import DeliverymanAdd from '../pages/DeliverymanAdd';
 import DeliverymanEdit from '../pages/Deliverymans/Edit';
 import Recipients from '../pages/Recipients';
 import RecipientsAdd from '../pages/Recipients/Add';
+import RecipientsEdit from '../pages/Recipients/Edit';
 import Problems from '../pages/Problems';
 import Profile from '../pages/Profile';
 
@@ -43,6 +44,11 @@ export default function Routes() {
             />
             <Route path="/recipients" exact component={Recipients} isPrivate />
             <Route path="/recipients/add" component={RecipientsAdd} isPrivate />
+            <Route
+                path="/recipients/edit"
+                component={RecipientsEdit}
+                isPrivate
+            />
             <Route path="/problems" component={Problems} isPrivate />
             <Route path="/profile" component={Profile} isPrivate />
         </Switch>

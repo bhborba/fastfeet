@@ -65,7 +65,7 @@ routes.get('/recipient', RecipientController.index);
 // cadastro
 routes.post('/recipient', RecipientController.store);
 // atualização
-routes.put('/recipient', RecipientController.update);
+routes.put('/recipient/:id', RecipientController.update);
 
 // encomendas
 // listagem

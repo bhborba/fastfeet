@@ -7,28 +7,25 @@ import { editSuccess, editFailure, addSuccess, addFailure } from './actions';
 
 export function* edit({ payload }) {
     try {
-        const { id, product, deliveryman, recipient } = payload.data;
+        const { id, ...rest } = payload.data;
 
         const newValues = {
-            product,
-            deliveryman_id: deliveryman,
-            recipient_id: recipient,
+            ...rest,
         };
 
-        yield call(api.put, `packages/${id}`, newValues);
+        yield call(api.put, `recipient/${id}`, newValues);
 
-        toast.success('Encomenda atualizada com sucesso!');
+        toast.success('Destinatário atualizado com sucesso!');
 
         yield put(editSuccess());
     } catch (err) {
-        toast.error('Erro ao atualizar encomenda, confira os dados');
+        toast.error('Erro ao atualizar destinatário, confira os dados');
         yield put(editFailure());
     }
 }
 
 export function* add({ payload }) {
     try {
-        console.log(payload.data);
         const { ...rest } = payload.data;
 
         const recipientData = { ...rest };

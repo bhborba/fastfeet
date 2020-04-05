@@ -22,7 +22,7 @@ export default function Add() {
         <Container>
             <Form onSubmit={handleSubmit}>
                 <header>
-                    <h1>Cadastro de entregadores</h1>
+                    <h1>Cadastro de Destinatário</h1>
                     <div>
                         <Link className="back" type="button" to="/recipients">
                             <MdKeyboardArrowLeft color="#FFFFFF" size={20} />
