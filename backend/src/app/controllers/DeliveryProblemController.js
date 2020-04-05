@@ -23,6 +23,7 @@ class DeliveryProblemController {
       include: [
         {
           model: Package,
+          where: { canceled_at: null, end_date: null },
           as: 'delivery',
           attributes: [
             'id',

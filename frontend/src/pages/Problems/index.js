@@ -39,14 +39,14 @@ export default function Problems() {
                             <>
                                 <tr key={problem.id}>
                                     <td className="firstCell">
-                                        <span>#{problem.id}</span>
+                                        <span>#{problem.delivery.id}</span>
                                     </td>
                                     <td>
                                         <span>{problem.description}</span>
                                     </td>
                                     <td className="lastCell">
                                         <div className="options">
-                                            <ProblemOptions />
+                                            <ProblemOptions data={problem} />
                                         </div>
                                     </td>
                                 </tr>

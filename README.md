@@ -8,6 +8,7 @@ A aplicação desenvolvida é um app para uma transportadora fictícia, o FastFe
 
 - backend server: yarn dev
 - backend queues: yarn queue
+- frontend server: yarn start
 
 ## Especificações do ambiente de desenvolvimento
 
