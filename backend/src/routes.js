@@ -66,6 +66,8 @@ routes.get('/recipient', RecipientController.index);
 routes.post('/recipient', RecipientController.store);
 // atualização
 routes.put('/recipient/:id', RecipientController.update);
+// excluir
+routes.delete('/recipient/:id', RecipientController.delete);
 
 // encomendas
 // listagem

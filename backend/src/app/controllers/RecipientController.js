@@ -12,7 +12,12 @@ class RecipientController {
       where = {
         name: { [Op.like]: `%${q}%` },
       };
+    } else {
+      where = {
+        active: true,
+      };
     }
+
     const recipients = await Recipient.findAll({
       where,
       attributes: [
@@ -98,6 +103,19 @@ class RecipientController {
       zip,
       state,
     });
+  }
+
+  // cancelamento de encomenda
+  async delete(req, res) {
+    // procura na base de dados o usuário que deve ser editado
+    const recipient = await Recipient.findByPk(req.params.id);
+
+    // define o entregador como inativo no app
+    recipient.active = false;
+
+    await recipient.save();
+
+    return res.json(recipient);
   }
 }
 

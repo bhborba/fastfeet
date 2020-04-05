@@ -11,6 +11,7 @@ class Recipient extends Model {
         state: Sequelize.STRING,
         city: Sequelize.STRING,
         zip: Sequelize.STRING,
+        active: Sequelize.BOOLEAN,
       },
       {
         sequelize,

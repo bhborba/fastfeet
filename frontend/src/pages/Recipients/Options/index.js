@@ -25,7 +25,7 @@ export default function Options(recipients) {
             window.confirm('Tem certeza que deseja deletar esse destinatátio?')
         ) {
             try {
-                await api.delete(`recipientss/${id}`);
+                await api.delete(`recipient/${id}`);
             } catch (err) {
                 alert('Erro ao deletar destinatátio, tente novamente.');
             }
