@@ -7,6 +7,7 @@ import SessionController from './app/controllers/SessionContoller';
 import FileController from './app/controllers/FileController';
 import RecipientController from './app/controllers/RecipientController';
 import Deliveryman from './app/controllers/DeliverymanController';
+import DeliverymanSingleController from './app/controllers/DeliverymanSingleController';
 import PackageController from './app/controllers/PackageController';
 import NotificationController from './app/controllers/NotificationController';
 import DeliverController from './app/controllers/DeliverController';
@@ -23,6 +24,10 @@ routes.post('/sessions', SessionController.store);
 // notificacoes
 // listagem
 routes.get('/notifications/:id', NotificationController.index);
+
+// entregador
+// retorna dados do entregador
+routes.post('/deliveryman/:id', DeliverymanSingleController.index);
 
 // entregas
 // lista encomendas ainda não entregues nem canceladas
