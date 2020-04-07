@@ -37,11 +37,12 @@ export const Graphical = styled.View`
 `;
 
 export const StatusIcon = styled.View`
-    background: #7d40e7;
     border: #7d40e7;
     width: 9px;
     height: 9px;
     border-radius: 4.5px;
+
+    background: ${(props) => (props.done ? '#7d40e7' : '#fff')};
 `;
 
 export const Textual = styled.View`

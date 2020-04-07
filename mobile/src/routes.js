@@ -1,10 +1,15 @@
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 
 import SignIn from './pages/SignIn';
 
 import Deliveries from './pages/Deliveries';
 import Profile from './pages/Profile';
+import Details from './pages/Deliveries/Details';
+import ReportProblem from './pages/Deliveries/ReportProblem';
+import ListProblems from './pages/Deliveries/ListProblems';
+import ConfirmDelivery from './pages/Deliveries/ConfirmDelivery';
 
 export default (signedIn = false) =>
     createAppContainer(
@@ -24,6 +29,23 @@ export default (signedIn = false) =>
                             activeTintColor: '#7D40E7',
                             inactiveTintColor: '#999999',
                             background: '#FFFFFF',
+                        },
+                    }
+                ),
+                Stack: createStackNavigator(
+                    {
+                        Details,
+                        ReportProblem,
+                        ListProblems,
+                        ConfirmDelivery,
+                    },
+                    {
+                        defaultNavigationOptions: {
+                            headerTransparent: true,
+                            headerTintColor: '#FFF',
+                            headerLeftContainerStyle: {
+                                marginLeft: 20,
+                            },
                         },
                     }
                 ),

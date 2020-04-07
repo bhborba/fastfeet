@@ -1,4 +1,6 @@
 import React from 'react';
+import {format} from 'date-fns';
+import {utcToZonedTime} from 'date-fns-tz';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {
@@ -19,20 +21,29 @@ import {
     SeeMoreText,
 } from './styles';
 
-export default function Pack() {
+export default function Pack({data, navigation}) {
+    function convertDate(date) {
+        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const formatedDate = format(
+            utcToZonedTime(date, timezone),
+            'dd/MM/yyyy'
+        );
+
+        return formatedDate;
+    }
     return (
         <Container>
             <Top>
                 <Icon name="local-shipping" size={25} color="#7D40E7" />
-                <PackageName>Nome da entrega</PackageName>
+                <PackageName>{data.product}</PackageName>
             </Top>
             <Status>
                 <Graphical>
-                    <StatusIcon />
+                    <StatusIcon done />
                     <Line />
-                    <StatusIcon />
+                    <StatusIcon done={data.start_date} />
                     <Line />
-                    <StatusIcon />
+                    <StatusIcon done={data.end_date} />
                 </Graphical>
                 <Textual>
                     <Text>Aguardando {'\n'} Retirada</Text>
@@ -43,14 +54,15 @@ export default function Pack() {
             <Details>
                 <Info>
                     <InfoHeader>Data</InfoHeader>
-                    <InfoDetails>07/04/2020</InfoDetails>
+                    <InfoDetails>{convertDate(data.created_at)}</InfoDetails>
                 </Info>
                 <Info>
                     <InfoHeader>Cidade</InfoHeader>
-                    <InfoDetails>Rio do Sul</InfoDetails>
+                    <InfoDetails>{data.recipient.city}</InfoDetails>
                 </Info>
                 <Info>
-                    <SeeMore>
+                    <SeeMore
+                        onPress={() => navigation.navigate('Details', {data})}>
                         <SeeMoreText>Ver detalhes</SeeMoreText>
                     </SeeMore>
                 </Info>

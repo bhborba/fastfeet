@@ -68,11 +68,21 @@ export const Pending = styled.TouchableOpacity`
     margin-right: 15px;
 `;
 
-export const PendingText = styled.Text``;
+export const PendingText = styled.Text`
+    text-decoration: ${(props) => (props.active ? 'underline' : 'none')};
+    text-decoration-color: ${(props) => (props.active ? '#7d40e7' : '#999999')};
+    color: ${(props) => (props.active ? '#7d40e7' : '#999999')};
+    font-weight: bold;
+`;
 
 export const Delivered = styled.TouchableOpacity``;
 
-export const DeliveredText = styled.Text``;
+export const DeliveredText = styled.Text`
+    text-decoration: ${(props) => (props.active ? 'underline' : 'none')};
+    text-decoration-color: ${(props) => (props.active ? '#7d40e7' : '#999999')};
+    color: ${(props) => (props.active ? '#7d40e7' : '#999999')};
+    font-weight: bold;
+`;
 
 export const List = styled.FlatList.attrs({
     showsVerticalScrollIndicator: false,

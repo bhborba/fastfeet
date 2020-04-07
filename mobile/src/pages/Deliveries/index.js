@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import {useSelector} from 'react-redux';
 import {StatusBar} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import api from '~/services/api';
 
 import Pack from '~/pages/Pack';
 
@@ -25,9 +27,32 @@ import {
 
 Icon.loadFont();
 
-const data = [1, 2, 3, 4, 5];
+export default function Deliveries({navigation}) {
+    const profile = useSelector((state) => state.user.profile);
+    const [deliveries, setDeliveries] = useState([]);
+    const [pending, setPending] = useState(true);
+    const [delivered, setDelivered] = useState(false);
 
-export default function Deliveries() {
+    async function loadDelivered() {
+        const response = await api.get(`deliveryman/${profile.id}/delivered`);
+
+        setDeliveries(response.data);
+        setDelivered(true);
+        setPending(false);
+    }
+
+    async function loadDeliveries() {
+        const response = await api.get(`deliveryman/${profile.id}/deliveries`);
+
+        setDeliveries(response.data);
+        setDelivered(false);
+        setPending(true);
+    }
+
+    useEffect(() => {
+        loadDeliveries();
+    }, []);
+
     return (
         <Container>
             <StatusBar barStyle="dark-content" backgroundColor="#6a51ae" />
@@ -35,13 +60,12 @@ export default function Deliveries() {
                 <Info>
                     <Avatar
                         source={{
-                            uri:
-                                'https://www.diariodocentrodomundo.com.br/wp-content/uploads/2018/08/bolsonaro-4.jpg',
+                            uri: profile.avatar.url,
                         }}
                     />
                     <UserMessage>
                         <Welcome>Bem vindo de volta,</Welcome>
-                        <UserName>Doidão do superpop</UserName>
+                        <UserName>{profile.name}</UserName>
                     </UserMessage>
                 </Info>
                 <Icon name="exit-to-app" size={25} color="#E74040" />
@@ -51,19 +75,25 @@ export default function Deliveries() {
                 <ContentHeader>
                     <Deliver>Entregas</Deliver>
                     <Filter>
-                        <Pending>
-                            <PendingText>Pendentes</PendingText>
+                        <Pending onPress={loadDeliveries}>
+                            <PendingText active={pending}>
+                                Pendentes
+                            </PendingText>
                         </Pending>
-                        <Delivered>
-                            <DeliveredText>Entregues</DeliveredText>
+                        <Delivered onPress={loadDelivered}>
+                            <DeliveredText active={delivered}>
+                                Entregues
+                            </DeliveredText>
                         </Delivered>
                     </Filter>
                 </ContentHeader>
 
                 <List
-                    data={data}
-                    keyExtractor={(item) => String(item)}
-                    renderItem={({item}) => <Pack data={item} />}
+                    data={deliveries}
+                    keyExtractor={(item) => String(item.id)}
+                    renderItem={({item}) => (
+                        <Pack data={item} navigation={navigation} />
+                    )}
                 />
             </Content>
         </Container>
