@@ -2,6 +2,8 @@ import React from 'react';
 import {StatusBar} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+import Pack from '~/pages/Pack';
+
 import {
     Container,
     Header,
@@ -19,11 +21,11 @@ import {
     DeliveredText,
     PendingText,
     List,
-    ListContent,
-    PackageName,
 } from './styles';
 
 Icon.loadFont();
+
+const data = [1, 2, 3, 4, 5];
 
 export default function Deliveries() {
     return (
@@ -58,16 +60,11 @@ export default function Deliveries() {
                     </Filter>
                 </ContentHeader>
 
-                <List>
-                    <ListContent>
-                        <Icon name="local-shipping" size={25} color="#7D40E7" />
-                        <PackageName>Entrega</PackageName>
-                    </ListContent>
-                    <ListContent>
-                        <Icon name="local-shipping" size={25} color="#7D40E7" />
-                        <PackageName>Entrega</PackageName>
-                    </ListContent>
-                </List>
+                <List
+                    data={data}
+                    keyExtractor={(item) => String(item)}
+                    renderItem={({item}) => <Pack data={item} />}
+                />
             </Content>
         </Container>
     );

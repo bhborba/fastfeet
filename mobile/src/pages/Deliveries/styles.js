@@ -42,10 +42,10 @@ export const UserName = styled.Text`
 
 export const Content = styled.View`
     margin-top: 22.5px;
-    padding: 0 20px;
 `;
 
 export const ContentHeader = styled.View`
+    padding: 0 20px;
     flex-direction: row;
     display: flex;
     justify-content: space-between;
@@ -76,14 +76,5 @@ export const DeliveredText = styled.Text``;
 
 export const List = styled.FlatList.attrs({
     showsVerticalScrollIndicator: false,
-    contentContainerStyle: {padding: 30},
+    contentContainerStyle: {padding: 20},
 })``;
-
-export const ListContent = styled.View`
-    margin-bottom: 15px;
-    box-shadow: #0000001a;
-`;
-
-export const PackageName = styled.Text`
-    font-size: 50px;
-`;
