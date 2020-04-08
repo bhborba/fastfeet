@@ -10,6 +10,7 @@ import Details from './pages/Deliveries/Details';
 import ReportProblem from './pages/Deliveries/ReportProblem';
 import ListProblems from './pages/Deliveries/ListProblems';
 import ConfirmDelivery from './pages/Deliveries/ConfirmDelivery';
+import Camera from './pages/Camera';
 
 export default (signedIn = false) =>
     createAppContainer(
@@ -38,6 +39,7 @@ export default (signedIn = false) =>
                         ReportProblem,
                         ListProblems,
                         ConfirmDelivery,
+                        Camera,
                     },
                     {
                         defaultNavigationOptions: {

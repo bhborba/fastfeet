@@ -51,6 +51,9 @@ routes.delete(
   DeliveryProblemController.delete
 );
 
+// upload de arquivos
+routes.post('/files', upload.single('file'), FileController.store);
+
 /*
  ** rotas que só irão funcionar com o token de autenticação **
  */
@@ -67,8 +70,6 @@ routes.put('/deliverymans/:id', Deliveryman.update);
 routes.delete('/deliverymans/:id', Deliveryman.delete);
 
 // rota de upload de arquivos
-routes.post('/files', upload.single('file'), FileController.store);
-
 routes.put('/users', UserController.update);
 
 // destinatarios

@@ -121,7 +121,10 @@ export default function Details(data) {
                         </Button>
                     </MiddleButton>
 
-                    <Button>
+                    <Button
+                        onPress={() =>
+                            data.navigation.navigate('ConfirmDelivery', {info})
+                        }>
                         <Icon name="alarm-on" size={25} color="#7D40E7" />
                         <ButtonText>Confirmar{'\n'}entrega</ButtonText>
                     </Button>
