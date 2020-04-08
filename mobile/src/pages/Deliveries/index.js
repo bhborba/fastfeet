@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {StatusBar} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import api from '~/services/api';
 
+import {signOut} from '~/store/modules/auth/actions';
 import Pack from '~/pages/Pack';
 
 import {
@@ -14,6 +15,7 @@ import {
     UserMessage,
     Welcome,
     UserName,
+    LogoutButton,
     Content,
     ContentHeader,
     Deliver,
@@ -29,6 +31,7 @@ Icon.loadFont();
 
 export default function Deliveries({navigation}) {
     const profile = useSelector((state) => state.user.profile);
+    const dispatch = useDispatch();
     const [deliveries, setDeliveries] = useState([]);
     const [pending, setPending] = useState(true);
     const [delivered, setDelivered] = useState(false);
@@ -53,6 +56,10 @@ export default function Deliveries({navigation}) {
         loadDeliveries();
     }, []);
 
+    function handleLogout() {
+        dispatch(signOut());
+    }
+
     return (
         <Container>
             <StatusBar barStyle="dark-content" backgroundColor="#6a51ae" />
@@ -68,7 +75,9 @@ export default function Deliveries({navigation}) {
                         <UserName>{profile.name}</UserName>
                     </UserMessage>
                 </Info>
-                <Icon name="exit-to-app" size={25} color="#E74040" />
+                <LogoutButton onPress={handleLogout}>
+                    <Icon name="exit-to-app" size={25} color="#E74040" />
+                </LogoutButton>
             </Header>
 
             <Content>

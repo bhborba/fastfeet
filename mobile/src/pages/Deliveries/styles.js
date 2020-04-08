@@ -40,6 +40,8 @@ export const UserName = styled.Text`
     font-size: 22px;
 `;
 
+export const LogoutButton = styled.TouchableOpacity``;
+
 export const Content = styled.View`
     margin-top: 22.5px;
 `;
@@ -87,4 +89,6 @@ export const DeliveredText = styled.Text`
 export const List = styled.FlatList.attrs({
     showsVerticalScrollIndicator: false,
     contentContainerStyle: {padding: 20},
-})``;
+})`
+    margin-bottom: 100px;
+`;
