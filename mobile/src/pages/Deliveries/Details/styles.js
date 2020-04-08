@@ -83,6 +83,8 @@ export const MiddleButton = styled.View`
 `;
 
 export const ButtonText = styled.Text`
+    font-weight: bold;
     text-align: center;
     border-left-color: black;
+    color: #999999;
 `;

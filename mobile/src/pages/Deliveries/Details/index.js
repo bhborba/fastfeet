@@ -99,13 +99,19 @@ export default function Details(data) {
                 </Card>
 
                 <Buttons>
-                    <Button>
+                    <Button
+                        onPress={() =>
+                            data.navigation.navigate('ReportProblem', {info})
+                        }>
                         <Icon name="highlight-off" size={25} color="#E74040" />
                         <ButtonText>Informar{'\n'}Problema</ButtonText>
                     </Button>
 
                     <MiddleButton>
-                        <Button>
+                        <Button
+                            onPress={() =>
+                                data.navigation.navigate('ListProblems', {info})
+                            }>
                             <Icon
                                 name="info-outline"
                                 size={25}
