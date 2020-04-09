@@ -11,7 +11,7 @@ A aplicação desenvolvida é um app para uma transportadora fictícia, o FastFe
 - Sucrase + Nodemon;
 - ESLint + Prettier + EditorConfig;
 - Sequelize (PostgreSQL);
-- Mongoose (MongoDB)
+- Mongoose (MongoDB) - Notificações
 - Bee-queue (Redis)
 - Nodemailer
 - Handlebars

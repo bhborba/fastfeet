@@ -24,6 +24,8 @@ routes.post('/sessions', SessionController.store);
 // notificacoes
 // listagem
 routes.get('/notifications/:id', NotificationController.index);
+// marcar como lida
+routes.put('/notifications/:id', NotificationController.update);
 
 // entregador
 // retorna dados do entregador

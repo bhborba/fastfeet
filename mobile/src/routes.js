@@ -5,6 +5,7 @@ import {createBottomTabNavigator} from 'react-navigation-tabs';
 import SignIn from './pages/SignIn';
 
 import Deliveries from './pages/Deliveries';
+import Notifications from './pages/Notifications';
 import Profile from './pages/Profile';
 import Details from './pages/Deliveries/Details';
 import ReportProblem from './pages/Deliveries/ReportProblem';
@@ -22,6 +23,7 @@ export default (signedIn = false) =>
                 App: createBottomTabNavigator(
                     {
                         Deliveries,
+                        Notifications,
                         Profile,
                     },
                     {

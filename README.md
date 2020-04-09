@@ -7,8 +7,11 @@ A aplicação desenvolvida é um app para uma transportadora fictícia, o FastFe
 ### **Como rodar**
 
 - backend server: yarn dev
-- backend queues: yarn queue
+- backend queues (email): yarn queue
 - frontend server: yarn start
+- mobile*:  react-native run-ios --simulator "iPhone 11 Pro"
+
+*A aplicação mobile foi testada apenas para iOS. 
 
 ## Especificações do ambiente de desenvolvimento
 
