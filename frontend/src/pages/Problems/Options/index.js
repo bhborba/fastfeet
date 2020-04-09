@@ -15,7 +15,7 @@ import {
     Modal,
 } from './styles';
 
-export default function ProblemOptions(problem) {
+export default function Options(problem) {
     const [visible, setVisible] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
 

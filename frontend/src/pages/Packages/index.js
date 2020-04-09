@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { MdSearch, MdAdd } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 
-import DeliveryOptions from '~/components/DeliveryOptions';
+import Options from './Options';
 
 import api from '~/services/api';
 
@@ -148,7 +148,7 @@ export default function Dashboard() {
                                     </td>
                                     <td className="lastCell">
                                         <div className="options">
-                                            <DeliveryOptions data={pack} />
+                                            <Options data={pack} />
                                         </div>
                                     </td>
                                 </tr>

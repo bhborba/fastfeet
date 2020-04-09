@@ -6,7 +6,7 @@ import api from '~/services/api';
 import history from '~/services/history';
 import { Container, Badge, Container2, OptionList, Option } from './styles';
 
-export default function DeliverymanOptions(deliveryman) {
+export default function Options(deliveryman) {
     const [visible, setVisible] = useState(false);
 
     function handleToggleVisible() {

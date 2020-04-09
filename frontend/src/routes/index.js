@@ -4,26 +4,23 @@ import Route from './Route';
 
 import SignIn from '../pages/SignIn';
 
-import SignUp from '../pages/SignUp';
-import Dashboard from '../pages/Dashboard';
-import PackageEdit from '../pages/PackageEdit';
-import PackageAdd from '../pages/PackageAdd';
+import Packages from '../pages/Packages';
+import PackageEdit from '../pages/Packages/Edit';
+import PackageAdd from '../pages/Packages/Add';
 import Deliverymans from '../pages/Deliverymans';
-import DeliverymanAdd from '../pages/DeliverymanAdd';
+import DeliverymanAdd from '../pages/Deliverymans/Add';
 import DeliverymanEdit from '../pages/Deliverymans/Edit';
 import Recipients from '../pages/Recipients';
 import RecipientsAdd from '../pages/Recipients/Add';
 import RecipientsEdit from '../pages/Recipients/Edit';
 import Problems from '../pages/Problems';
-import Profile from '../pages/Profile';
 
 export default function Routes() {
     return (
         <Switch>
             <Route path="/" exact component={SignIn} />
 
-            <Route path="/register" component={SignUp} isPrivate />
-            <Route path="/dashboard" exact component={Dashboard} isPrivate />
+            <Route path="/packages" exact component={Packages} isPrivate />
             <Route path="/packages/edit" component={PackageEdit} isPrivate />
             <Route path="/packages/add" component={PackageAdd} isPrivate />
             <Route
@@ -50,7 +47,6 @@ export default function Routes() {
                 isPrivate
             />
             <Route path="/problems" component={Problems} isPrivate />
-            <Route path="/profile" component={Profile} isPrivate />
         </Switch>
     );
 }

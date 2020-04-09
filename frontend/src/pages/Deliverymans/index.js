@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { MdSearch, MdAdd } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 
-import DeliverymanOptions from '~/components/DeliverymanOptions';
+import Options from './Options';
 
 import api from '~/services/api';
 
@@ -94,9 +94,7 @@ export default function Deliverymans() {
                                     </td>
                                     <td className="lastCell">
                                         <div className="options">
-                                            <DeliverymanOptions
-                                                data={deliveryman}
-                                            />
+                                            <Options data={deliveryman} />
                                         </div>
                                     </td>
                                 </tr>

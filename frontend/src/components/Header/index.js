@@ -20,7 +20,7 @@ export default function() {
             <Content>
                 <nav>
                     <img src={logo} alt="FastFeet" />
-                    <NavLink activeClassName="selected" to="/dashboard">
+                    <NavLink activeClassName="selected" to="/packages">
                         ENCOMENDAS
                     </NavLink>
                     <NavLink activeClassName="selected" to="/deliverymans">

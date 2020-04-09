@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import ProblemOptions from '~/components/ProblemOptions';
+import Options from './Options';
 
 import api from '~/services/api';
 
@@ -46,7 +46,7 @@ export default function Problems() {
                                     </td>
                                     <td className="lastCell">
                                         <div className="options">
-                                            <ProblemOptions data={problem} />
+                                            <Options data={problem} />
                                         </div>
                                     </td>
                                 </tr>

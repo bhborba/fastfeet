@@ -16,7 +16,7 @@ import {
     Modal,
 } from './styles';
 
-export default function DeliveryOptions(pack) {
+export default function Options(pack) {
     const [visible, setVisible] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
 

@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Form } from '@unform/web';
-import { Link } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 
 import { MdKeyboardArrowLeft, MdCheck } from 'react-icons/md';
 import { Container, PackageDetails, selectStyles } from './styles';
 
+import { editRequest } from '~/store/modules/packs/actions';
 import Select from '~/components/Select';
 import Input from '~/components/Input';
 
-import { addRequest } from '~/store/modules/packs/actions';
 import api from '~/services/api';
-import history from '~/services/history';
 
-export default function PackageAdd() {
+export default function PackageEdit() {
     const dispatch = useDispatch();
+    const location = useLocation();
     const [recipients, setRecipients] = useState([]);
     const [deliverymans, setDeliverymans] = useState([]);
 
@@ -34,13 +34,10 @@ export default function PackageAdd() {
         }
 
         loadDeliverymans();
-    }, []);
+    }, [location]);
 
-    function handleSubmit({ recipient, deliveryman, product }) {
-        dispatch(addRequest(recipient, deliveryman, product));
-        history.push({
-            pathname: '/dashboard',
-        });
+    async function handleSubmit(formValues) {
+        dispatch(editRequest(formValues));
     }
 
     const recipientOptions = recipients.map(recipient => {
@@ -53,11 +50,11 @@ export default function PackageAdd() {
 
     return (
         <Container>
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit} initialData={location.state}>
                 <header>
-                    <h1>Cadastro de encomendas</h1>
+                    <h1>Edição de encomendas</h1>
                     <div>
-                        <Link className="back" type="button" to="/dashboard">
+                        <Link className="back" type="button" to="/packages">
                             <MdKeyboardArrowLeft color="#FFFFFF" size={20} />
                             VOLTAR
                         </Link>
@@ -78,6 +75,10 @@ export default function PackageAdd() {
                                 className="select"
                                 options={recipientOptions}
                                 styles={selectStyles}
+                                defaultValue={{
+                                    value: location.state.recipient.id,
+                                    label: location.state.recipient.name,
+                                }}
                             />
                         </div>
                         <div>
@@ -87,6 +88,10 @@ export default function PackageAdd() {
                                 className="select"
                                 options={deliveryMansOptions}
                                 styles={selectStyles}
+                                defaultValue={{
+                                    value: location.state.deliveryman.id,
+                                    label: location.state.deliveryman.name,
+                                }}
                             />
                         </div>
                     </div>
@@ -96,6 +101,7 @@ export default function PackageAdd() {
                         name="product"
                         placeholder="Produto"
                     />
+                    <Input name="id" type="hidden" />
                 </PackageDetails>
             </Form>
         </Container>

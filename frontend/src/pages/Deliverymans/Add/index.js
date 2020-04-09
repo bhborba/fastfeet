@@ -12,7 +12,7 @@ import { Container, DeliverymanDetails } from './styles';
 import { addRequest } from '~/store/modules/user/actions';
 import history from '~/services/history';
 
-export default function DeliverymanAdd() {
+export default function Add() {
     const dispatch = useDispatch();
 
     function handleSubmit({ name, email, avatar_id }) {
