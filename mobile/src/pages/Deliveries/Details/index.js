@@ -1,10 +1,13 @@
 import React from 'react';
 import {format} from 'date-fns';
 import {utcToZonedTime} from 'date-fns-tz';
-import {TouchableOpacity} from 'react-native';
+import {TouchableOpacity, Alert} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import {useSelector} from 'react-redux';
 
 import Background from '~/components/Background';
+
+import api from '~/services/api';
 
 import {
     Container,
@@ -23,6 +26,7 @@ import {
 } from './styles';
 
 export default function Details(data) {
+    const profile = useSelector((state) => state.user.profile);
     const info = data.navigation.state.params.data;
 
     function convertDate(date) {
@@ -33,6 +37,19 @@ export default function Details(data) {
         );
 
         return formatedDate;
+    }
+
+    async function handlePickPackage() {
+        try {
+            await api.put(`deliveryman/${profile.id}/${info.id}`);
+            Alert.alert('Sucesso!', 'Encomenda retirada');
+            data.navigation.navigate('Deliveries');
+        } catch (err) {
+            Alert.alert(
+                'Erro',
+                'Você não pode coletar mais de 5 encomendas por dia'
+            );
+        }
     }
 
     return (
@@ -52,7 +69,9 @@ export default function Details(data) {
                         </Header>
                         <Information>
                             <InformationHeader>DESTINATÁRIO</InformationHeader>
-                            <InformationData>{info.product}</InformationData>
+                            <InformationData>
+                                {info.recipient.name}
+                            </InformationData>
                         </Information>
                         <Information>
                             <InformationHeader>
@@ -137,15 +156,34 @@ export default function Details(data) {
                             </Button>
                         </MiddleButton>
 
-                        <Button
-                            onPress={() =>
-                                data.navigation.navigate('ConfirmDelivery', {
-                                    info,
-                                })
-                            }>
-                            <Icon name="alarm-on" size={25} color="#7D40E7" />
-                            <ButtonText>Confirmar{'\n'}entrega</ButtonText>
-                        </Button>
+                        {info.start_date ? (
+                            <Button
+                                disabled={!!info.end_date}
+                                onPress={() =>
+                                    data.navigation.navigate(
+                                        'ConfirmDelivery',
+                                        {
+                                            info,
+                                        }
+                                    )
+                                }>
+                                <Icon
+                                    name="alarm-on"
+                                    size={25}
+                                    color="#7D40E7"
+                                />
+                                <ButtonText>Confirmar{'\n'}entrega</ButtonText>
+                            </Button>
+                        ) : (
+                            <Button onPress={handlePickPackage}>
+                                <Icon
+                                    name="widgets"
+                                    size={25}
+                                    color="#7D40E7"
+                                />
+                                <ButtonText>Coletar{'\n'}encomenda</ButtonText>
+                            </Button>
+                        )}
                     </Buttons>
                 </CardList>
             </Container>
