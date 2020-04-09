@@ -2,7 +2,6 @@ import styled from 'styled-components/native';
 
 export const Container = styled.SafeAreaView`
     flex: 1;
-    background: #7d40e7;
 `;
 
 export const Form = styled.View`
@@ -20,7 +19,7 @@ export const Input = styled.TextInput`
 
 export const SubmitButton = styled.TouchableOpacity`
     margin-top: 20px;
-    background: black;
+    background: #7d40e7;
     border-radius: 4px;
     align-items: center;
     padding: 12px 0;

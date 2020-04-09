@@ -6,6 +6,8 @@ import {utcToZonedTime} from 'date-fns-tz';
 
 import api from '~/services/api';
 
+import Background from '~/components/Background';
+
 import {
     Container,
     Header,
@@ -39,24 +41,26 @@ export default function ListProblems(data) {
         loadProblems();
     }, []);
     return (
-        <Container>
-            <Header>{info.product}</Header>
+        <Background>
+            <Container>
+                <Header>{info.product}</Header>
 
-            <List
-                data={problems}
-                keyExtractor={(item) => String(item.id)}
-                renderItem={({item}) => (
-                    <Problem>
-                        <ProblemDescription>
-                            {item.description}
-                        </ProblemDescription>
-                        <ProblemDate>
-                            {convertDate(item.created_at)}
-                        </ProblemDate>
-                    </Problem>
-                )}
-            />
-        </Container>
+                <List
+                    data={problems}
+                    keyExtractor={(item) => String(item.id)}
+                    renderItem={({item}) => (
+                        <Problem>
+                            <ProblemDescription>
+                                {item.description}
+                            </ProblemDescription>
+                            <ProblemDate>
+                                {convertDate(item.created_at)}
+                            </ProblemDate>
+                        </Problem>
+                    )}
+                />
+            </Container>
+        </Background>
     );
 }
 

@@ -1,8 +1,9 @@
-import React from 'react';
-import {View} from 'react-native';
+import styled from 'styled-components/native';
+import LinearGradient from 'react-native-linear-gradient';
 
-import {Container} from './styles';
-
-export default function Background() {
-    return <Container />;
-}
+export default styled(LinearGradient).attrs({
+    colors: ['#7D40E7', '#FFFFFF'],
+    locations: [0, 0.5],
+})`
+    flex: 1;
+`;

@@ -4,12 +4,11 @@ import {utcToZonedTime} from 'date-fns-tz';
 import {TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import Backround from '~/components/Background';
+import Background from '~/components/Background';
 
 import {
     Container,
     CardList,
-    Purple,
     Card,
     Header,
     PackageHeader,
@@ -37,100 +36,120 @@ export default function Details(data) {
     }
 
     return (
-        <Container>
-            <CardList>
-                <Card>
-                    <Header>
-                        <Icon name="local-shipping" size={25} color="#7D40E7" />
-                        <PackageHeader>Informações da Entrega</PackageHeader>
-                    </Header>
-                    <Information>
-                        <InformationHeader>DESTINATÁRIO</InformationHeader>
-                        <InformationData>{info.product}</InformationData>
-                    </Information>
-                    <Information>
-                        <InformationHeader>
-                            ENDEREÇO DE ENTREGA
-                        </InformationHeader>
-                        <InformationData>
-                            {info.recipient.street}, {info.recipient.number},{' '}
-                            {info.recipient.city} - {info.recipient.state}
-                        </InformationData>
-                    </Information>
-                    <Information>
-                        <InformationHeader>PRODUTO</InformationHeader>
-                        <InformationData>{info.product}</InformationData>
-                    </Information>
-                </Card>
-
-                <Card>
-                    <Header>
-                        <Icon name="event" size={25} color="#7D40E7" />
-                        <PackageHeader>Situação da entrega</PackageHeader>
-                    </Header>
-                    <Information>
-                        <InformationHeader>STATUS</InformationHeader>
-                        <InformationData>
-                            {info.end_date ? 'Entregue' : 'Pendente'}
-                        </InformationData>
-                    </Information>
-                    <Date>
+        <Background>
+            <Container>
+                <CardList>
+                    <Card>
+                        <Header>
+                            <Icon
+                                name="local-shipping"
+                                size={25}
+                                color="#7D40E7"
+                            />
+                            <PackageHeader>
+                                Informações da Entrega
+                            </PackageHeader>
+                        </Header>
                         <Information>
-                            <InformationHeader>
-                                DATA DE RETIRADA
-                            </InformationHeader>
-                            <InformationData>
-                                {info.start_date
-                                    ? convertDate(info.start_date)
-                                    : '-- / -- / --'}
-                            </InformationData>
+                            <InformationHeader>DESTINATÁRIO</InformationHeader>
+                            <InformationData>{info.product}</InformationData>
                         </Information>
                         <Information>
                             <InformationHeader>
-                                DATA DE ENTREGA
+                                ENDEREÇO DE ENTREGA
                             </InformationHeader>
                             <InformationData>
-                                {info.end_date
-                                    ? convertDate(info.end_date)
-                                    : '-- / -- / --'}
+                                {info.recipient.street}, {info.recipient.number}
+                                , {info.recipient.city} - {info.recipient.state}
                             </InformationData>
                         </Information>
-                    </Date>
-                </Card>
+                        <Information>
+                            <InformationHeader>PRODUTO</InformationHeader>
+                            <InformationData>{info.product}</InformationData>
+                        </Information>
+                    </Card>
 
-                <Buttons>
-                    <Button
-                        onPress={() =>
-                            data.navigation.navigate('ReportProblem', {info})
-                        }>
-                        <Icon name="highlight-off" size={25} color="#E74040" />
-                        <ButtonText>Informar{'\n'}Problema</ButtonText>
-                    </Button>
+                    <Card>
+                        <Header>
+                            <Icon name="event" size={25} color="#7D40E7" />
+                            <PackageHeader>Situação da entrega</PackageHeader>
+                        </Header>
+                        <Information>
+                            <InformationHeader>STATUS</InformationHeader>
+                            <InformationData>
+                                {info.end_date ? 'Entregue' : 'Pendente'}
+                            </InformationData>
+                        </Information>
+                        <Date>
+                            <Information>
+                                <InformationHeader>
+                                    DATA DE RETIRADA
+                                </InformationHeader>
+                                <InformationData>
+                                    {info.start_date
+                                        ? convertDate(info.start_date)
+                                        : '-- / -- / --'}
+                                </InformationData>
+                            </Information>
+                            <Information>
+                                <InformationHeader>
+                                    DATA DE ENTREGA
+                                </InformationHeader>
+                                <InformationData>
+                                    {info.end_date
+                                        ? convertDate(info.end_date)
+                                        : '-- / -- / --'}
+                                </InformationData>
+                            </Information>
+                        </Date>
+                    </Card>
 
-                    <MiddleButton>
+                    <Buttons>
                         <Button
                             onPress={() =>
-                                data.navigation.navigate('ListProblems', {info})
+                                data.navigation.navigate('ReportProblem', {
+                                    info,
+                                })
                             }>
                             <Icon
-                                name="info-outline"
+                                name="highlight-off"
                                 size={25}
-                                color="#E7BA40"
+                                color="#E74040"
                             />
-                            <ButtonText>Visualizar{'\n'}Problemas</ButtonText>
+                            <ButtonText>Informar{'\n'}Problema</ButtonText>
                         </Button>
-                    </MiddleButton>
 
-                    <Button
-                        onPress={() =>
-                            data.navigation.navigate('ConfirmDelivery', {info})
-                        }>
-                        <Icon name="alarm-on" size={25} color="#7D40E7" />
-                        <ButtonText>Confirmar{'\n'}entrega</ButtonText>
-                    </Button>
-                </Buttons>
-            </CardList>
-        </Container>
+                        <MiddleButton>
+                            <Button
+                                onPress={() =>
+                                    data.navigation.navigate('ListProblems', {
+                                        info,
+                                    })
+                                }>
+                                <Icon
+                                    name="info-outline"
+                                    size={25}
+                                    color="#E7BA40"
+                                />
+                                <ButtonText>
+                                    Visualizar{'\n'}Problemas
+                                </ButtonText>
+                            </Button>
+                        </MiddleButton>
+
+                        <Button
+                            onPress={() =>
+                                data.navigation.navigate('ConfirmDelivery', {
+                                    info,
+                                })
+                            }>
+                            <Icon name="alarm-on" size={25} color="#7D40E7" />
+                            <ButtonText>Confirmar{'\n'}entrega</ButtonText>
+                        </Button>
+                    </Buttons>
+                </CardList>
+            </Container>
+        </Background>
     );
 }
 

@@ -23,6 +23,7 @@ export default function SignIn() {
                 <Input
                     keyboardType="numeric"
                     placeholder="Informe seu ID de cadastro"
+                    placeholderTextColor="#999999"
                     onSubmitEditing={handleSubmit}
                     value={id}
                     onChangeText={setId}

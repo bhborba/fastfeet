@@ -4,6 +4,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import api from '~/services/api';
 
+import Background from '~/components/Background';
+
 import {Container, Form, Input, SubmitButton, Text} from './styles';
 
 export default function ReportProblem(data) {
@@ -22,21 +24,24 @@ export default function ReportProblem(data) {
     }
 
     return (
-        <Container>
-            <Form>
-                <Input
-                    placeholder="Inclua aqui o problema que ocorreu na entrega."
-                    onSubmitEditing={handleSubmit}
-                    value={problemDescription}
-                    onChangeText={setProblemDescription}
-                    multiline
-                />
+        <Background>
+            <Container>
+                <Form>
+                    <Input
+                        placeholder="Inclua aqui o problema que ocorreu na entrega."
+                        placeholderTextColor="#999999"
+                        onSubmitEditing={handleSubmit}
+                        value={problemDescription}
+                        onChangeText={setProblemDescription}
+                        multiline
+                    />
 
-                <SubmitButton title="Enviar" onPress={handleSubmit}>
-                    <Text>Enviar</Text>
-                </SubmitButton>
-            </Form>
-        </Container>
+                    <SubmitButton title="Enviar" onPress={handleSubmit}>
+                        <Text>Enviar</Text>
+                    </SubmitButton>
+                </Form>
+            </Container>
+        </Background>
     );
 }
 
