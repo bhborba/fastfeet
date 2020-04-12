@@ -57,7 +57,7 @@ export default function PackageAdd() {
                 <header>
                     <h1>Cadastro de encomendas</h1>
                     <div>
-                        <Link className="back" type="button" to="/dashboard">
+                        <Link className="back" type="button" to="/packages">
                             <MdKeyboardArrowLeft color="#FFFFFF" size={20} />
                             VOLTAR
                         </Link>

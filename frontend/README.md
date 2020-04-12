@@ -23,3 +23,11 @@
 1. Adicione paginação no front-end e back-end para todas listagens;
 2. Utilize máscaras para o input de CEP;
 3. Crie um filtro para visualizar apenas as entregas com problemas na listagem de encomendas.
+
+## Tela de Login
+
+<img  src="./assets/login.png">
+
+## Tela de encomendas
+
+<img  src="./assets/main.png">
